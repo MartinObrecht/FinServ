@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinServ.Domain", "src\FinServ.Domain\FinServ.Domain.csproj", "{99604D3F-53E9-44AF-BD91-4A8CC69B74D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinServ.Domain", "src\FinServ.Domain\FinServ.Domain.csproj", "{99604D3F-53E9-44AF-BD91-4A8CC69B74D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinServ.Common", "src\FinServ.Common\FinServ.Common.csproj", "{409B3C6C-872D-4F52-852C-2D90BF8D2252}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinServ.Core", "src\FinServ.Common\FinServ.Core.csproj", "{409B3C6C-872D-4F52-852C-2D90BF8D2252}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinServ.Infra", "src\FinServ.Infra\FinServ.Infra.csproj", "{A5970441-ED5D-4597-8336-932E39B283EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinServ.Infra", "src\FinServ.Infra\FinServ.Infra.csproj", "{A5970441-ED5D-4597-8336-932E39B283EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinServ.Application", "src\FinServ.Application\FinServ.Application.csproj", "{5B3362CB-5308-4117-8095-C17AB9620D84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinServ.Application", "src\FinServ.Application\FinServ.Application.csproj", "{5B3362CB-5308-4117-8095-C17AB9620D84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinServ.Api", "src\FinServ.Api\FinServ.Api.csproj", "{40AE75EC-1646-4FE7-8845-83427F2E9F09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinServ.Api", "src\FinServ.Api\FinServ.Api.csproj", "{40AE75EC-1646-4FE7-8845-83427F2E9F09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
