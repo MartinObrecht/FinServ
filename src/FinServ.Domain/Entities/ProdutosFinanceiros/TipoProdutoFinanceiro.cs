@@ -7,10 +7,6 @@ namespace FinServ.Domain.Entities.ProdutosFinanceiros
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
-
-        public bool ProdutoValido(ITipoProdutoFinanceiro tipoProdutoFinanceiro)
-        {
-            throw new NotImplementedException();
-        }
+        public int CodigoProdutoFinanceiro { get; set; }
     }
 }

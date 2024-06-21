@@ -1,5 +1,4 @@
 ﻿using FinServ.Domain.Entities.Clientes;
-using FinServ.Domain.Entities.ProdutosFinanceiros;
 using FinServ.Domain.Interfaces.Clientes;
 using FinServ.Domain.Interfaces.Contas;
 using FinServ.Domain.Interfaces.ProdutosFinanceiros;
@@ -13,7 +12,7 @@ namespace FinServ.Domain.Entities.Contas
         public Investidor Investidor { get; set; }
         public int Numero { get; set; }
         public decimal Saldo { get; set; }
-        public ICollection<ProdutoFinanceiro> ProdutosFinanceiros { get; set; }
+        public CarteiraInvestimento CarteiraInvestimento { get; set; }
 
         public int AbreContaInvestimento(IInvestidor investidor)
         {

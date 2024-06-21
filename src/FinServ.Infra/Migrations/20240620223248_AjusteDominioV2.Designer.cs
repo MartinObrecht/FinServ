@@ -4,6 +4,7 @@ using FinServ.Infra.Database.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinServ.Infra.Migrations
 {
     [DbContext(typeof(FinServContext))]
-    partial class FinServContextModelSnapshot : ModelSnapshot
+    [Migration("20240620223248_AjusteDominioV2")]
+    partial class AjusteDominioV2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,12 +143,15 @@ namespace FinServ.Infra.Migrations
                     b.Property<decimal>("TaxaJuros")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("TipoProdutoFinanceiroId")
+                    b.Property<int>("TipoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TipoProdutoId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TipoProdutoFinanceiroId");
+                    b.HasIndex("TipoId");
 
                     b.ToTable("ProdutosFinanceiros", (string)null);
                 });
@@ -170,9 +176,6 @@ namespace FinServ.Infra.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CodigoProdutoFinanceiro")
-                        .IsUnique();
 
                     b.ToTable("TiposProdutoFinanceiro", (string)null);
                 });
@@ -216,13 +219,13 @@ namespace FinServ.Infra.Migrations
 
             modelBuilder.Entity("FinServ.Domain.Entities.ProdutosFinanceiros.ProdutoFinanceiro", b =>
                 {
-                    b.HasOne("FinServ.Domain.Entities.ProdutosFinanceiros.TipoProdutoFinanceiro", "TipoProdutoFinanceiro")
+                    b.HasOne("FinServ.Domain.Entities.ProdutosFinanceiros.TipoProdutoFinanceiro", "Tipo")
                         .WithMany()
-                        .HasForeignKey("TipoProdutoFinanceiroId")
+                        .HasForeignKey("TipoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("TipoProdutoFinanceiro");
+                    b.Navigation("Tipo");
                 });
 
             modelBuilder.Entity("FinServ.Domain.Entities.Contas.CarteiraInvestimento", b =>

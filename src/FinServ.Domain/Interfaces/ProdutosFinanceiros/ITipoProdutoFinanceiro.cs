@@ -4,7 +4,7 @@
     {
         string Nome { get; set; }
         string Descricao { get; set; }
+        int CodigoProdutoFinanceiro { get; set; }
 
-        bool ProdutoValido(ITipoProdutoFinanceiro tipoProdutoFinanceiro);
     }
 }

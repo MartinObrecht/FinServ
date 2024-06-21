@@ -15,12 +15,5 @@ namespace FinServ.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("CriarConta")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<IActionResult> CriarContaAsync([FromBody] CriarContaRequest request)
-        {
-            var response = await _mediator.Send(request);
-            return Created("api/Conta/CriarConta", response);
-        }
     }
 }
