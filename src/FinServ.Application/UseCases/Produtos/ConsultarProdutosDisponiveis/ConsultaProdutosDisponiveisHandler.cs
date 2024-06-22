@@ -1,47 +1,43 @@
 ﻿using FinServ.Domain.Repositories.Produtos;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
-namespace FinServ.Application.UseCases.Produtos.ConsultarProdutoPorCodigo
+namespace FinServ.Application.UseCases.Produtos.ConsultarProdutosDisponiveis
 {
-    public class ConsultarProdutoPorCodigoHandler : IRequestHandler<ConsultarProdutoPorCodigoRequest, IList<ConsultarProdutoPorCodigoResponse>>
+    public class ConsultaProdutosDisponiveisHandler : IRequestHandler<ConsultaProdutosDisponiveisRequest, IList<ConsultarProdutosDisponiveisResponse>>
     {
         private readonly IMediator _mediator;
         private readonly IProdutoRepository _produtoRepository;
-        private readonly ILogger<ConsultarProdutoPorCodigoHandler> _logger;
+        private readonly ILogger<ConsultaProdutosDisponiveisHandler> _logger;
 
-        public ConsultarProdutoPorCodigoHandler(IMediator mediator, IProdutoRepository produtoRepository, ILogger<ConsultarProdutoPorCodigoHandler> logger)
+        public ConsultaProdutosDisponiveisHandler(IMediator mediator, IProdutoRepository produtoRepository, ILogger<ConsultaProdutosDisponiveisHandler> logger)
         {
             _mediator = mediator;
             _produtoRepository = produtoRepository;
             _logger = logger;
         }
 
-        public async Task<IList<ConsultarProdutoPorCodigoResponse>> Handle(ConsultarProdutoPorCodigoRequest request, CancellationToken cancellationToken)
+        public async Task<IList<ConsultarProdutosDisponiveisResponse>> Handle(ConsultaProdutosDisponiveisRequest request, CancellationToken cancellationToken)
         {
-            var Produtos = await _produtoRepository.ObterPorCodigoAsync(request.CodigoProduto);
+            var Produtos = await _produtoRepository.ObterProdutosDisponiveisAsync();
 
-            var response = new List<ConsultarProdutoPorCodigoResponse>();
-
+            var response = new List<ConsultarProdutosDisponiveisResponse>();
 
             foreach (var produto in Produtos)
             {
-                response.Add(new ConsultarProdutoPorCodigoResponse
+                response.Add(new ConsultarProdutosDisponiveisResponse
                 {
                     IdProduto = produto.Id,
                     NomeProduto = produto.Nome,
                     TaxaJurosMensal = produto.TaxaJurosMensal,
-                    DataVencimento = produto.DataVencimento,
+                    DataVencimento = produto.DataVencimento.ToShortDateString(),
                     Quantidade = produto.Quantidade,
                     TipoProduto = produto.TipoProduto.Nome,
                     DescricaoProduto = produto.TipoProduto.Descricao,
                     CodigoTipoProduto = produto.TipoProduto.CodigoProduto
                 });
             }
-
             return response;
-
         }
     }
 }

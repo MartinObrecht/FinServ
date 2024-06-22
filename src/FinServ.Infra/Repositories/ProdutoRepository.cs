@@ -46,7 +46,7 @@ namespace FinServ.Infra.Repositories
             }
         }
 
-        public async Task<ICollection<Produto>> ObterProdutoPorCodigoAsync(int codigoProduto)
+        public async Task<IEnumerable<Produto>> ObterPorCodigoAsync(int codigoProduto)
         {
             try
             {
@@ -70,7 +70,10 @@ namespace FinServ.Infra.Repositories
         {
             try
             {
-                return await _context.Produtos.AsNoTracking().FirstOrDefaultAsync(pf => pf.Id == id);
+                return await _context.Produtos
+                    .Include(pf => pf.TipoProduto)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(pf => pf.Id == id);
             }
             catch (Exception ex)
             {
@@ -102,6 +105,52 @@ namespace FinServ.Infra.Repositories
             {
                 _logger.LogError(ex, "Erro ao obter todos os produtos financeiros.");
                 throw new InvalidOperationException("Erro ao obter todos os produtos financeiros.", ex);
+            }
+        }
+
+        public async Task<IEnumerable<Produto>> ObterProdutosDisponiveisAsync()
+        {
+            try
+            {
+                return await _context.Produtos
+                    .Include(pf => pf.TipoProduto)
+                    .Where(pf => pf.Quantidade > 0)
+                    .AsNoTracking()
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao obter produtos financeiros disponíveis.");
+                throw new InvalidOperationException("Erro ao obter produtos financeiros disponíveis.", ex);
+            }
+        }
+
+        public async Task AtualizarProdutoAsync(Produto produto)
+        {
+            try
+            {
+                _context.Produtos.Update(produto);
+                await _context.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao atualizar produto financeiro: {Produto}", produto);
+                throw new InvalidOperationException("Erro ao atualizar produto financeiro.", ex);
+            }
+        }
+
+        public async Task DeletarProdutoAsync(Produto produto)
+        {
+            try
+            {
+                _context.Produtos.Remove(produto);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao remover produto financeiro: {Produto}", produto);
+                throw new InvalidOperationException("Erro ao remover produto financeiro.", ex);
             }
         }
     }

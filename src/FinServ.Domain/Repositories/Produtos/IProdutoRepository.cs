@@ -8,6 +8,9 @@ namespace FinServ.Domain.Repositories.Produtos
         Task<IEnumerable<Produto>> ObterTodosAsync();
         Task CadastrarAsync(Produto Produto);
         Task CadastrarEmLoteAsync(IEnumerable<Produto?> Produtos);
-        Task<ICollection<Produto?>> ObterProdutoPorCodigoAsync(int CodigoProduto);
+        Task<IEnumerable<Produto?>> ObterPorCodigoAsync(int CodigoProduto);
+        Task<IEnumerable<Produto>> ObterProdutosDisponiveisAsync();
+        Task AtualizarProdutoAsync(Produto Produto);
+        Task DeletarProdutoAsync(Produto Produto);
     }
 }

@@ -26,8 +26,6 @@
 
   <ItemGroup>
     <Folder Include="UseCases\Contas\" />
-    <Folder Include="UseCases\Produtos\ConsultaProdutosDIsponiveis\" />
-    <Folder Include="UseCases\Produtos\NewFolder\" />
   </ItemGroup>
 
 </Project>
