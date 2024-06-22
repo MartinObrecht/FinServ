@@ -1,4 +1,5 @@
-﻿using FinServ.Domain.Interfaces.Produtos;
+﻿using FinServ.Domain.Entities.Ativos;
+using FinServ.Domain.Interfaces;
 
 namespace FinServ.Domain.Entities.Produtos
 {
@@ -6,11 +7,12 @@ namespace FinServ.Domain.Entities.Produtos
     {
         public int Id { get; set; }
         public string Nome { get; set; }
+        public string Descricao { get; set; }
+        public int CodigoProduto { get; set; }
         public double TaxaJurosMensal { get; set; }
         public DateTime DataVencimento { get; set; }
         public int Quantidade { get; set; }
-
-        public int TipoProdutoId { get; set; }
-        public TipoProduto TipoProduto { get; set; }
+        public ICollection<Ativo> Ativos { get; set; }
+        public double Valor { get; set; }
     }
 }

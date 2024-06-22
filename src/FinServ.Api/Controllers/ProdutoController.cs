@@ -1,11 +1,11 @@
-﻿using FinServ.Application.UseCases.Produtos.CadastrarProdutos;
-using FinServ.Application.UseCases.Produtos.ConsultarProdutoPorCodigo;
-using FinServ.Application.UseCases.Produtos.ConsultarProdutosDisponiveis;
-using FinServ.Application.UseCases.Produtos.EditarProduto;
-using FinServ.Application.UseCases.Produtos.DeletarProdutoAsync;
+﻿using FinServ.Application.UseCases.Produtos.CreateProdutos;
+using FinServ.Application.UseCases.Produtos.QueryProdutoByCodigo;
+using FinServ.Application.UseCases.Produtos.QueryAvailableProdutos;
+using FinServ.Application.UseCases.Produtos.UpdateProduto;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using FinServ.Application.UseCases.Produtos.DeleteProduto;
 
 namespace FinServ.Api.Controllers
 {
@@ -15,19 +15,19 @@ namespace FinServ.Api.Controllers
     {
         private readonly IMediator _mediator;
         private readonly ILogger<ProdutoController> _logger;
-        private readonly IValidator<CadastrarProdutosRequest> _cadastrarProdutosFinanceirosValidator;
+        private readonly IValidator<CreateProdutosRequest> _cadastrarProdutosFinanceirosValidator;
 
-        public ProdutoController(IMediator mediator, ILogger<ProdutoController> logger, IValidator<CadastrarProdutosRequest> cadastrarProdutosFinanceirosValidator)
+        public ProdutoController(IMediator mediator, ILogger<ProdutoController> logger, IValidator<CreateProdutosRequest> cadastrarProdutosFinanceirosValidator)
         {
             _mediator = mediator;
             _logger = logger;
             _cadastrarProdutosFinanceirosValidator = cadastrarProdutosFinanceirosValidator;
         }
 
-        [HttpPost("CadastrarProdutos")]
+        [HttpPost("Register")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> CadastrarProdutosAsync([FromBody] CadastrarProdutosRequest request)
+        public async Task<IActionResult> RegisterAsync([FromBody] CreateProdutosRequest request)
         {
             var validationResult = _cadastrarProdutosFinanceirosValidator.ValidateAsync(request);
 
@@ -48,14 +48,14 @@ namespace FinServ.Api.Controllers
                     return StatusCode(StatusCodes.Status500InternalServerError, response);
             }
 
-            return Created(nameof(CadastrarProdutosAsync), response);
+            return Created(nameof(RegisterAsync), response);
         }
 
-        [HttpGet("ConsultarProdutoPorCodigo")]
+        [HttpGet("GetByCodigo")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> ObterPorCodigoAsync([FromQuery] ConsultarProdutoPorCodigoRequest request)
+        public async Task<IActionResult> GetByCodigoAsync([FromQuery] QueryProdutoByCodigoRequest request)
         {
             var response = await _mediator.Send(request);
 
@@ -67,13 +67,13 @@ namespace FinServ.Api.Controllers
             return Ok(response);
         }
 
-        [HttpGet("ConsultarProdutosDisponiveis")]
+        [HttpGet("GetAvailable")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> ObterProdutosDisponiveisAsync()
+        public async Task<IActionResult> GetAvailableAsync()
         {
-            var request = new ConsultaProdutosDisponiveisRequest();
+            var request = new QueryAvailableProdutosRequest();
 
             var response = await _mediator.Send(request);
 
@@ -85,11 +85,11 @@ namespace FinServ.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPut("EditarProduto")]
+        [HttpPut("Update")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> EditarProdutoAsync([FromBody] EditarProdutoRequest request)
+        public async Task<IActionResult> UpdateAsync([FromBody] UpdateProdutoRequest request)
         {
             var response = await _mediator.Send(request);
 
@@ -101,11 +101,11 @@ namespace FinServ.Api.Controllers
             return Ok(response);
         }
 
-        [HttpDelete("RemoverProduto")]
+        [HttpDelete("Remove")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> RemoverProdutoAsync([FromQuery] RemoverProdutoRequest request)
+        public async Task<IActionResult> DeleteAsync([FromQuery] DeleteProdutoRequest request)
         {
             var response = await _mediator.Send(request);
 

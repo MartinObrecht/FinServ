@@ -1,6 +1,5 @@
 ﻿using FinServ.Domain.Entities.Produtos;
-using FinServ.Domain.Repositories.Investidores;
-using FinServ.Domain.Repositories.Produtos;
+using FinServ.Domain.Repositories;
 using FinServ.Infra.Database.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -10,15 +9,15 @@ namespace FinServ.Infra.Repositories
     public class ProdutoRepository : IProdutoRepository
     {
         private readonly FinServContext _context;
-        private readonly ILogger<IInvestidorRepository> _logger;
+        private readonly ILogger<IClienteRepository> _logger;
 
-        public ProdutoRepository(FinServContext context, ILogger<IInvestidorRepository> logger)
+        public ProdutoRepository(FinServContext context, ILogger<IClienteRepository> logger)
         {
             _context = context;
             _logger = logger;
         }
 
-        public async Task CadastrarAsync(Produto produto)
+        public async Task RegisterAsync(Produto produto)
         {
             try
             {
@@ -32,7 +31,7 @@ namespace FinServ.Infra.Repositories
             }
         }
 
-        public async Task CadastrarEmLoteAsync(IEnumerable<Produto?> produtos)
+        public async Task RegisterInBatchAsync(IEnumerable<Produto?> produtos)
         {
             try
             {
@@ -46,13 +45,12 @@ namespace FinServ.Infra.Repositories
             }
         }
 
-        public async Task<IEnumerable<Produto>> ObterPorCodigoAsync(int codigoProduto)
+        public async Task<IEnumerable<Produto>> GetByCodigoAsync(int codigoProduto)
         {
             try
             {
                 var Produtos = await _context.Produtos
-                    .Include(pf => pf.TipoProduto)
-                    .Where(pf => pf.TipoProduto.CodigoProduto == codigoProduto)
+                    .Where(pf => pf.CodigoProduto == codigoProduto)
                     .AsNoTracking()
                     .ToListAsync();
 
@@ -66,12 +64,11 @@ namespace FinServ.Infra.Repositories
         }
 
 
-        public async Task<Produto?> ObterPorIdAsync(int id)
+        public async Task<Produto?> GetByIdAsync(int id)
         {
             try
             {
                 return await _context.Produtos
-                    .Include(pf => pf.TipoProduto)
                     .AsNoTracking()
                     .FirstOrDefaultAsync(pf => pf.Id == id);
             }
@@ -82,20 +79,7 @@ namespace FinServ.Infra.Repositories
             }
         }
 
-        public async Task<Produto?> ObterPorNomeAsync(string nome)
-        {
-            try
-            {
-                return await _context.Produtos.AsNoTracking().FirstOrDefaultAsync(pf => pf.Nome == nome);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Erro ao obter produto financeiro por nome: {Nome}", nome);
-                throw new InvalidOperationException("Erro ao obter produto financeiro por nome.", ex);
-            }
-        }
-
-        public async Task<IEnumerable<Produto>> ObterTodosAsync()
+        public async Task<IEnumerable<Produto>> GetAllAsync()
         {
             try
             {
@@ -108,12 +92,11 @@ namespace FinServ.Infra.Repositories
             }
         }
 
-        public async Task<IEnumerable<Produto>> ObterProdutosDisponiveisAsync()
+        public async Task<IEnumerable<Produto>> GetAvailableAsync()
         {
             try
             {
                 return await _context.Produtos
-                    .Include(pf => pf.TipoProduto)
                     .Where(pf => pf.Quantidade > 0)
                     .AsNoTracking()
                     .ToListAsync();
@@ -125,7 +108,7 @@ namespace FinServ.Infra.Repositories
             }
         }
 
-        public async Task AtualizarProdutoAsync(Produto produto)
+        public async Task UpdateAsync(Produto produto)
         {
             try
             {
@@ -140,7 +123,7 @@ namespace FinServ.Infra.Repositories
             }
         }
 
-        public async Task DeletarProdutoAsync(Produto produto)
+        public async Task DeleteAsync(Produto produto)
         {
             try
             {
