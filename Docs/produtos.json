@@ -1,112 +1,128 @@
-{
-  "produtosFinanceirosRequest": [
-    {
-      "nome": "CDB-A",
-      "codigoTipoProduto": 101,
-      "taxaJuros": 8.00,
-      "dataVencimento": "2026-06-21T00:50:15.777Z"
-    },
-    {
-      "nome": "CDB-B",
-      "codigoTipoProduto": 101,
-      "taxaJuros": 7.50,
-      "dataVencimento": "2026-06-22T00:50:15.777Z"
-    },
-    {
-      "nome": "CDB-C",
-      "codigoTipoProduto": 101,
-      "taxaJuros": 7.00,
-      "dataVencimento": "2026-06-23T00:50:15.777Z"
-    },
-    {
-      "nome": "CDB-X",
-      "codigoTipoProduto": 102,
-      "taxaJuros": 6.00,
-      "dataVencimento": "2026-06-24T00:50:15.777Z"
-    },
-    {
-      "nome": "CDB-Y",
-      "codigoTipoProduto": 102,
-      "taxaJuros": 5.50,
-      "dataVencimento": "2026-06-25T00:50:15.777Z"
-    },
-    {
-      "nome": "CDB-Z",
-      "codigoTipoProduto": 102,
-      "taxaJuros": 5.00,
-      "dataVencimento": "2026-06-26T00:50:15.777Z"
-    },
-    {
-      "nome": "CDB-1",
-      "codigoTipoProduto": 103,
-      "taxaJuros": 4.00,
-      "dataVencimento": "2026-06-27T00:50:15.777Z"
-    },
-    {
-      "nome": "CDB-2",
-      "codigoTipoProduto": 103,
-      "taxaJuros": 3.50,
-      "dataVencimento": "2026-06-28T00:50:15.777Z"
-    },
-    {
-      "nome": "CDB-3",
-      "codigoTipoProduto": 103,
-      "taxaJuros": 3.00,
-      "dataVencimento": "2026-06-29T00:50:15.777Z"
-    },
-    {
-      "nome": "CDB-D",
-      "codigoTipoProduto": 101,
-      "taxaJuros": 7.75,
-      "dataVencimento": "2026-06-30T00:50:15.777Z"
-    },
-    {
-      "nome": "CDB-E",
-      "codigoTipoProduto": 101,
-      "taxaJuros": 7.25,
-      "dataVencimento": "2026-07-01T00:50:15.777Z"
-    },
-    {
-      "nome": "CDB-F",
-      "codigoTipoProduto": 101,
-      "taxaJuros": 6.75,
-      "dataVencimento": "2026-07-02T00:50:15.777Z"
-    },
-    {
-      "nome": "CDB-G",
-      "codigoTipoProduto": 102,
-      "taxaJuros": 5.75,
-      "dataVencimento": "2026-07-03T00:50:15.777Z"
-    },
-    {
-      "nome": "CDB-H",
-      "codigoTipoProduto": 102,
-      "taxaJuros": 5.25,
-      "dataVencimento": "2026-07-04T00:50:15.777Z"
-    },
-    {
-      "nome": "CDB-I",
-      "codigoTipoProduto": 102,
-      "taxaJuros": 4.75,
-      "dataVencimento": "2026-07-05T00:50:15.777Z"
-    },
-    {
-      "nome": "CDB-4",
-      "codigoTipoProduto": 103,
-      "taxaJuros": 3.25,
-      "dataVencimento": "2026-07-06T00:50:15.777Z"
-    },
-    {
-      "nome": "CDB-5",
-      "codigoTipoProduto": 103,
-      "taxaJuros": 2.75,
-      "dataVencimento": "2026-07-07T00:50:15.777Z"
-    },
-    {
-      "nome": "CDB-6",
-      "codigoTipoProduto": 103,
-      "taxaJuros": 2.25,
-      "dataVencimento": "2026-07-08T00:50:15.777Z"
-    }
-  ]
-}
+[
+  {
+    "TipoProdutoId": 1,
+    "TaxaJurosMensal": 0.8,
+    "DataVencimento": "2026-06-21T00:50:15.777",
+    "Nome": "CDB-A",
+    "Quantidade": 10
+  },
+  {
+    "TipoProdutoId": 1,
+    "TaxaJurosMensal": 0.75,
+    "DataVencimento": "2026-06-22T00:50:15.777",
+    "Nome": "CDB-B",
+    "Quantidade": 20
+  },
+  {
+    "TipoProdutoId": 1,
+    "TaxaJurosMensal": 0.7,
+    "DataVencimento": "2026-06-23T00:50:15.777",
+    "Nome": "CDB-C",
+    "Quantidade": 30
+  },
+  {
+    "TipoProdutoId": 2,
+    "TaxaJurosMensal": 0.6,
+    "DataVencimento": "2026-06-24T00:50:15.777",
+    "Nome": "CDB-X",
+    "Quantidade": 40
+  },
+  {
+    "TipoProdutoId": 2,
+    "TaxaJurosMensal": 0.55,
+    "DataVencimento": "2026-06-25T00:50:15.777",
+    "Nome": "CDB-Y",
+    "Quantidade": 50
+  },
+  {
+    "TipoProdutoId": 2,
+    "TaxaJurosMensal": 0.5,
+    "DataVencimento": "2026-06-26T00:50:15.777",
+    "Nome": "CDB-Z",
+    "Quantidade": 10
+  },
+  {
+    "TipoProdutoId": 3,
+    "TaxaJurosMensal": 0.4,
+    "DataVencimento": "2026-06-27T00:50:15.777",
+    "Nome": "CDB-1",
+    "Quantidade": 20
+  },
+  {
+    "TipoProdutoId": 3,
+    "TaxaJurosMensal": 0.35,
+    "DataVencimento": "2026-06-28T00:50:15.777",
+    "Nome": "CDB-2",
+    "Quantidade": 30
+  },
+  {
+    "TipoProdutoId": 3,
+    "TaxaJurosMensal": 0.3,
+    "DataVencimento": "2026-06-29T00:50:15.777",
+    "Nome": "CDB-3",
+    "Quantidade": 40
+  },
+  {
+    "TipoProdutoId": 1,
+    "TaxaJurosMensal": 0.775,
+    "DataVencimento": "2026-06-30T00:50:15.777",
+    "Nome": "CDB-D",
+    "Quantidade": 50
+  },
+  {
+    "TipoProdutoId": 1,
+    "TaxaJurosMensal": 0.725,
+    "DataVencimento": "2026-07-01T00:50:15.777",
+    "Nome": "CDB-E",
+    "Quantidade": 10
+  },
+  {
+    "TipoProdutoId": 1,
+    "TaxaJurosMensal": 0.675,
+    "DataVencimento": "2026-07-02T00:50:15.777",
+    "Nome": "CDB-F",
+    "Quantidade": 20
+  },
+  {
+    "TipoProdutoId": 2,
+    "TaxaJurosMensal": 0.575,
+    "DataVencimento": "2026-07-03T00:50:15.777",
+    "Nome": "CDB-G",
+    "Quantidade": 30
+  },
+  {
+    "TipoProdutoId": 2,
+    "TaxaJurosMensal": 0.525,
+    "DataVencimento": "2026-07-04T00:50:15.777",
+    "Nome": "CDB-H",
+    "Quantidade": 40
+  },
+  {
+    "TipoProdutoId": 2,
+    "TaxaJurosMensal": 0.475,
+    "DataVencimento": "2026-07-05T00:50:15.777",
+    "Nome": "CDB-I",
+    "Quantidade": 50
+  },
+  {
+    "TipoProdutoId": 3,
+    "TaxaJurosMensal": 0.325,
+    "DataVencimento": "2026-07-06T00:50:15.777",
+    "Nome": "CDB-4",
+    "Quantidade": 10
+  },
+  {
+    "TipoProdutoId": 3,
+    "TaxaJurosMensal": 0.275,
+    "DataVencimento": "2026-07-07T00:50:15.777",
+    "Nome": "CDB-5",
+    "Quantidade": 20
+  },
+  {
+    "TipoProdutoId": 3,
+    "TaxaJurosMensal": 0.225,
+    "DataVencimento": "2026-07-08T00:50:15.777",
+    "Nome": "CDB-6",
+    "Quantidade": 30
+  }
+]

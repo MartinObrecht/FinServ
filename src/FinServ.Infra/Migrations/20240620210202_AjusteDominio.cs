@@ -58,13 +58,13 @@ namespace FinServ.Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AtivoFinanceiro",
+                name: "Ativo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ValorCompra = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValorCompra = table.Column<double>(type: "double(18,2)", nullable: false),
                     DataCompra = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ProdutoFinanceiroId = table.Column<int>(type: "int", nullable: false),
                     CarteiraInvestimentoId = table.Column<int>(type: "int", nullable: true)
@@ -87,12 +87,12 @@ namespace FinServ.Infra.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_AtivoFinanceiro_CarteiraInvestimentoId",
-                table: "AtivoFinanceiro",
+                table: "Ativo",
                 column: "CarteiraInvestimentoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AtivoFinanceiro_ProdutoFinanceiroId",
-                table: "AtivoFinanceiro",
+                table: "Ativo",
                 column: "ProdutoFinanceiroId");
 
             migrationBuilder.CreateIndex(
@@ -106,7 +106,7 @@ namespace FinServ.Infra.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AtivoFinanceiro");
+                name: "Ativo");
 
             migrationBuilder.DropTable(
                 name: "CarteiraInvestimento");
@@ -128,10 +128,10 @@ namespace FinServ.Infra.Migrations
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
-            migrationBuilder.AddColumn<decimal>(
+            migrationBuilder.AddColumn<double>(
                 name: "ValorInvestido",
                 table: "ProdutosFinanceiros",
-                type: "decimal(18,2)",
+                type: "double(18,2)",
                 nullable: false,
                 defaultValue: 0m);
 

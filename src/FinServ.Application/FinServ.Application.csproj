@@ -24,4 +24,8 @@
     <ProjectReference Include="..\FinServ.Domain\FinServ.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UseCases\Contas\" />
+  </ItemGroup>
+
 </Project>

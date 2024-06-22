@@ -47,7 +47,7 @@ namespace FinServ.Infra.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     InvestidorId = table.Column<int>(type: "int", nullable: false),
                     Numero = table.Column<int>(type: "int", nullable: false),
-                    Saldo = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Saldo = table.Column<double>(type: "double(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -67,8 +67,8 @@ namespace FinServ.Infra.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TipoId = table.Column<int>(type: "int", nullable: false),
-                    ValorInvestido = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    TaxaJuros = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValorInvestido = table.Column<double>(type: "double(18,2)", nullable: false),
+                    TaxaJurosMes = table.Column<double>(type: "double(18,2)", nullable: false),
                     DataInvestimento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataVencimento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ContaInvestimentoId = table.Column<int>(type: "int", nullable: true)

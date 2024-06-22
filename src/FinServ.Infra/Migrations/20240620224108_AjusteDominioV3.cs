@@ -11,9 +11,9 @@ namespace FinServ.Infra.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateIndex(
-                name: "IX_TiposProdutoFinanceiro_CodigoProdutoFinanceiro",
+                name: "IX_TiposProdutoFinanceiro_CodigoProduto",
                 table: "TiposProdutoFinanceiro",
-                column: "CodigoProdutoFinanceiro",
+                column: "CodigoProduto",
                 unique: true);
         }
 
@@ -21,7 +21,7 @@ namespace FinServ.Infra.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropIndex(
-                name: "IX_TiposProdutoFinanceiro_CodigoProdutoFinanceiro",
+                name: "IX_TiposProdutoFinanceiro_CodigoProduto",
                 table: "TiposProdutoFinanceiro");
         }
     }

@@ -1,9 +1,8 @@
-﻿using FinServ.Domain.Interfaces.ProdutosFinanceiros;
-
+﻿using FinServ.Domain.Entities.Produtos;
 namespace FinServ.Domain.Repositories.TiposProdutos
 {
     public interface ITipoProdutoRepository
     {
-        Task<ITipoProdutoFinanceiro?> ObterPorCodigoProdutoAsync(int codigoProduto);
+        Task<TipoProduto?> ObterPorCodigoProdutoAsync(int codigoProduto);
     }
 }

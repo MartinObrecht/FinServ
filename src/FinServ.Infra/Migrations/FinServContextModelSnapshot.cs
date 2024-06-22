@@ -43,7 +43,7 @@ namespace FinServ.Infra.Migrations
                     b.ToTable("Investidores", (string)null);
                 });
 
-            modelBuilder.Entity("FinServ.Domain.Entities.Contas.CarteiraInvestimento", b =>
+            modelBuilder.Entity("FinServ.Domain.Entities.Contas.Carteira", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,7 +51,7 @@ namespace FinServ.Infra.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AtivoFinanceiroId")
+                    b.Property<int>("AtivoId")
                         .HasColumnType("int");
 
                     b.Property<int>("ContaId")
@@ -62,10 +62,10 @@ namespace FinServ.Infra.Migrations
                     b.HasIndex("ContaId")
                         .IsUnique();
 
-                    b.ToTable("CarteirasInvestimento", (string)null);
+                    b.ToTable("Carteiras", (string)null);
                 });
 
-            modelBuilder.Entity("FinServ.Domain.Entities.Contas.ContaInvestimento", b =>
+            modelBuilder.Entity("FinServ.Domain.Entities.Contas.Conta", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -79,17 +79,17 @@ namespace FinServ.Infra.Migrations
                     b.Property<int>("Numero")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Saldo")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Saldo")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
                     b.HasIndex("InvestidorId");
 
-                    b.ToTable("ContasInvestimento", (string)null);
+                    b.ToTable("Contas", (string)null);
                 });
 
-            modelBuilder.Entity("FinServ.Domain.Entities.ProdutosFinanceiros.AtivoFinanceiro", b =>
+            modelBuilder.Entity("FinServ.Domain.Entities.Produtos.Ativo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -97,7 +97,7 @@ namespace FinServ.Infra.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CarteiraInvestimentoId")
+                    b.Property<int?>("CarteiraId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataCompra")
@@ -107,22 +107,22 @@ namespace FinServ.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProdutoFinanceiroId")
+                    b.Property<int>("ProdutoId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("ValorCompra")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("ValorCompra")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarteiraInvestimentoId");
+                    b.HasIndex("CarteiraId");
 
-                    b.HasIndex("ProdutoFinanceiroId");
+                    b.HasIndex("ProdutoId");
 
-                    b.ToTable("AtivosFinanceiros", (string)null);
+                    b.ToTable("Ativos", (string)null);
                 });
 
-            modelBuilder.Entity("FinServ.Domain.Entities.ProdutosFinanceiros.ProdutoFinanceiro", b =>
+            modelBuilder.Entity("FinServ.Domain.Entities.Produtos.Produto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -137,20 +137,23 @@ namespace FinServ.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("TaxaJuros")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
 
-                    b.Property<int>("TipoProdutoFinanceiroId")
+                    b.Property<double>("TaxaJurosMensal")
+                        .HasColumnType("float");
+
+                    b.Property<int>("TipoProdutoId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TipoProdutoFinanceiroId");
+                    b.HasIndex("TipoProdutoId");
 
-                    b.ToTable("ProdutosFinanceiros", (string)null);
+                    b.ToTable("Produtos", (string)null);
                 });
 
-            modelBuilder.Entity("FinServ.Domain.Entities.ProdutosFinanceiros.TipoProdutoFinanceiro", b =>
+            modelBuilder.Entity("FinServ.Domain.Entities.Produtos.TipoProduto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -158,7 +161,7 @@ namespace FinServ.Infra.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CodigoProdutoFinanceiro")
+                    b.Property<int>("CodigoProduto")
                         .HasColumnType("int");
 
                     b.Property<string>("Descricao")
@@ -171,24 +174,24 @@ namespace FinServ.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CodigoProdutoFinanceiro")
+                    b.HasIndex("CodigoProduto")
                         .IsUnique();
 
-                    b.ToTable("TiposProdutoFinanceiro", (string)null);
+                    b.ToTable("TiposProduto", (string)null);
                 });
 
-            modelBuilder.Entity("FinServ.Domain.Entities.Contas.CarteiraInvestimento", b =>
+            modelBuilder.Entity("FinServ.Domain.Entities.Contas.Carteira", b =>
                 {
-                    b.HasOne("FinServ.Domain.Entities.Contas.ContaInvestimento", "Conta")
-                        .WithOne("CarteiraInvestimento")
-                        .HasForeignKey("FinServ.Domain.Entities.Contas.CarteiraInvestimento", "ContaId")
+                    b.HasOne("FinServ.Domain.Entities.Contas.Conta", "Conta")
+                        .WithOne("Carteira")
+                        .HasForeignKey("FinServ.Domain.Entities.Contas.Carteira", "ContaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Conta");
                 });
 
-            modelBuilder.Entity("FinServ.Domain.Entities.Contas.ContaInvestimento", b =>
+            modelBuilder.Entity("FinServ.Domain.Entities.Contas.Conta", b =>
                 {
                     b.HasOne("FinServ.Domain.Entities.Clientes.Investidor", "Investidor")
                         .WithMany()
@@ -199,41 +202,46 @@ namespace FinServ.Infra.Migrations
                     b.Navigation("Investidor");
                 });
 
-            modelBuilder.Entity("FinServ.Domain.Entities.ProdutosFinanceiros.AtivoFinanceiro", b =>
+            modelBuilder.Entity("FinServ.Domain.Entities.Produtos.Ativo", b =>
                 {
-                    b.HasOne("FinServ.Domain.Entities.Contas.CarteiraInvestimento", null)
-                        .WithMany("AtivosFinanceiros")
-                        .HasForeignKey("CarteiraInvestimentoId");
+                    b.HasOne("FinServ.Domain.Entities.Contas.Carteira", null)
+                        .WithMany("Ativos")
+                        .HasForeignKey("CarteiraId");
 
-                    b.HasOne("FinServ.Domain.Entities.ProdutosFinanceiros.ProdutoFinanceiro", "ProdutoFinanceiro")
+                    b.HasOne("FinServ.Domain.Entities.Produtos.Produto", "Produto")
                         .WithMany()
-                        .HasForeignKey("ProdutoFinanceiroId")
+                        .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ProdutoFinanceiro");
+                    b.Navigation("Produto");
                 });
 
-            modelBuilder.Entity("FinServ.Domain.Entities.ProdutosFinanceiros.ProdutoFinanceiro", b =>
+            modelBuilder.Entity("FinServ.Domain.Entities.Produtos.Produto", b =>
                 {
-                    b.HasOne("FinServ.Domain.Entities.ProdutosFinanceiros.TipoProdutoFinanceiro", "TipoProdutoFinanceiro")
-                        .WithMany()
-                        .HasForeignKey("TipoProdutoFinanceiroId")
+                    b.HasOne("FinServ.Domain.Entities.Produtos.TipoProduto", "TipoProduto")
+                        .WithMany("Produtos")
+                        .HasForeignKey("TipoProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("TipoProdutoFinanceiro");
+                    b.Navigation("TipoProduto");
                 });
 
-            modelBuilder.Entity("FinServ.Domain.Entities.Contas.CarteiraInvestimento", b =>
+            modelBuilder.Entity("FinServ.Domain.Entities.Contas.Carteira", b =>
                 {
-                    b.Navigation("AtivosFinanceiros");
+                    b.Navigation("Ativos");
                 });
 
-            modelBuilder.Entity("FinServ.Domain.Entities.Contas.ContaInvestimento", b =>
+            modelBuilder.Entity("FinServ.Domain.Entities.Contas.Conta", b =>
                 {
-                    b.Navigation("CarteiraInvestimento")
+                    b.Navigation("Carteira")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FinServ.Domain.Entities.Produtos.TipoProduto", b =>
+                {
+                    b.Navigation("Produtos");
                 });
 #pragma warning restore 612, 618
         }

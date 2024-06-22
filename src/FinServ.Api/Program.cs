@@ -1,6 +1,6 @@
 using FinServ.Application.UseCases.Investidores.CadastrarInvestidor;
 using FinServ.Domain.Repositories.Investidores;
-using FinServ.Domain.Repositories.ProdutosFinanceiros;
+using FinServ.Domain.Repositories.Produtos;
 using FinServ.Domain.Repositories.TiposProdutos;
 using FinServ.Infra.Database.Context;
 using FinServ.Infra.Repositories;
@@ -38,8 +38,8 @@ namespace FinServ.Api
             });
 
             builder.Services.AddScoped<IInvestidorRepository, InvestidorRepository>();
-            builder.Services.AddScoped<IProdutoFinaceiroRepository, ProdutoFinanceiroRepository>();
-            builder.Services.AddScoped<ITipoProdutoRepository, TipoProdutoFinanceiroRepository>();
+            builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            builder.Services.AddScoped<ITipoProdutoRepository, TipoProdutoRepository>();
 
 
             var app = builder.Build();

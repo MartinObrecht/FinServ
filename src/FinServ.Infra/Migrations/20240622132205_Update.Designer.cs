@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinServ.Infra.Migrations
 {
     [DbContext(typeof(FinServContext))]
-    [Migration("20240620224108_AjusteDominioV3")]
-    partial class AjusteDominioV3
+    [Migration("20240622132205_Update")]
+    partial class Update
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,7 +83,7 @@ namespace FinServ.Infra.Migrations
                         .HasColumnType("int");
 
                     b.Property<double>("Saldo")
-                        .HasColumnType("double(18,2)");
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -92,7 +92,7 @@ namespace FinServ.Infra.Migrations
                     b.ToTable("ContasInvestimento", (string)null);
                 });
 
-            modelBuilder.Entity("FinServ.Domain.Entities.ProdutosFinanceiros.Ativo", b =>
+            modelBuilder.Entity("FinServ.Domain.Entities.Produtos.Ativo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -110,22 +110,22 @@ namespace FinServ.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProdutoFinanceiroId")
+                    b.Property<int>("ProdutoId")
                         .HasColumnType("int");
 
                     b.Property<double>("ValorCompra")
-                        .HasColumnType("double(18,2)");
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CarteiraInvestimentoId");
 
-                    b.HasIndex("ProdutoFinanceiroId");
+                    b.HasIndex("ProdutoId");
 
-                    b.ToTable("AtivosFinanceiros", (string)null);
+                    b.ToTable("Ativos", (string)null);
                 });
 
-            modelBuilder.Entity("FinServ.Domain.Entities.ProdutosFinanceiros.Produto", b =>
+            modelBuilder.Entity("FinServ.Domain.Entities.Produtos.Produto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -140,23 +140,23 @@ namespace FinServ.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("TaxaJurosMes")
-                        .HasColumnType("double(18,2)");
-
-                    b.Property<int>("TipoId")
+                    b.Property<int>("Quantidade")
                         .HasColumnType("int");
+
+                    b.Property<double>("TaxaJurosMes")
+                        .HasColumnType("float");
 
                     b.Property<int>("TipoProdutoId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TipoId");
+                    b.HasIndex("TipoProdutoId");
 
-                    b.ToTable("ProdutosFinanceiros", (string)null);
+                    b.ToTable("Produtos", (string)null);
                 });
 
-            modelBuilder.Entity("FinServ.Domain.Entities.ProdutosFinanceiros.TipoProduto", b =>
+            modelBuilder.Entity("FinServ.Domain.Entities.Produtos.TipoProduto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -180,7 +180,7 @@ namespace FinServ.Infra.Migrations
                     b.HasIndex("CodigoProduto")
                         .IsUnique();
 
-                    b.ToTable("TiposProdutoFinanceiro", (string)null);
+                    b.ToTable("TiposProduto", (string)null);
                 });
 
             modelBuilder.Entity("FinServ.Domain.Entities.Contas.CarteiraInvestimento", b =>
@@ -205,30 +205,30 @@ namespace FinServ.Infra.Migrations
                     b.Navigation("Investidor");
                 });
 
-            modelBuilder.Entity("FinServ.Domain.Entities.ProdutosFinanceiros.Ativo", b =>
+            modelBuilder.Entity("FinServ.Domain.Entities.Produtos.Ativo", b =>
                 {
                     b.HasOne("FinServ.Domain.Entities.Contas.CarteiraInvestimento", null)
                         .WithMany("AtivosFinanceiros")
                         .HasForeignKey("CarteiraInvestimentoId");
 
-                    b.HasOne("FinServ.Domain.Entities.ProdutosFinanceiros.Produto", "Produto")
+                    b.HasOne("FinServ.Domain.Entities.Produtos.Produto", "Produto")
                         .WithMany()
-                        .HasForeignKey("ProdutoFinanceiroId")
+                        .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Produto");
                 });
 
-            modelBuilder.Entity("FinServ.Domain.Entities.ProdutosFinanceiros.Produto", b =>
+            modelBuilder.Entity("FinServ.Domain.Entities.Produtos.Produto", b =>
                 {
-                    b.HasOne("FinServ.Domain.Entities.ProdutosFinanceiros.TipoProduto", "Tipo")
-                        .WithMany()
-                        .HasForeignKey("TipoId")
+                    b.HasOne("FinServ.Domain.Entities.Produtos.TipoProduto", "TipoProduto")
+                        .WithMany("Produtos")
+                        .HasForeignKey("TipoProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Tipo");
+                    b.Navigation("TipoProduto");
                 });
 
             modelBuilder.Entity("FinServ.Domain.Entities.Contas.CarteiraInvestimento", b =>
@@ -240,6 +240,11 @@ namespace FinServ.Infra.Migrations
                 {
                     b.Navigation("CarteiraInvestimento")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FinServ.Domain.Entities.Produtos.TipoProduto", b =>
+                {
+                    b.Navigation("Produtos");
                 });
 #pragma warning restore 612, 618
         }

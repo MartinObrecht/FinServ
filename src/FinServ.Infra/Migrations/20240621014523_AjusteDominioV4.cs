@@ -17,17 +17,17 @@ namespace FinServ.Infra.Migrations
             migrationBuilder.RenameColumn(
                 name: "TipoId",
                 table: "ProdutosFinanceiros",
-                newName: "TipoProdutoFinanceiroId");
+                newName: "TipoProdutoId");
 
             migrationBuilder.RenameIndex(
                 name: "IX_ProdutosFinanceiros_TipoId",
                 table: "ProdutosFinanceiros",
-                newName: "IX_ProdutosFinanceiros_TipoProdutoFinanceiroId");
+                newName: "IX_ProdutosFinanceiros_TipoProdutoId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_ProdutosFinanceiros_TiposProdutoFinanceiro_TipoProdutoFinanceiroId",
+                name: "FK_ProdutosFinanceiros_TiposProdutoFinanceiro_TipoProdutoId",
                 table: "ProdutosFinanceiros",
-                column: "TipoProdutoFinanceiroId",
+                column: "TipoProdutoId",
                 principalTable: "TiposProdutoFinanceiro",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
@@ -37,16 +37,16 @@ namespace FinServ.Infra.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_ProdutosFinanceiros_TiposProdutoFinanceiro_TipoProdutoFinanceiroId",
+                name: "FK_ProdutosFinanceiros_TiposProdutoFinanceiro_TipoProdutoId",
                 table: "ProdutosFinanceiros");
 
             migrationBuilder.RenameColumn(
-                name: "TipoProdutoFinanceiroId",
+                name: "TipoProdutoId",
                 table: "ProdutosFinanceiros",
                 newName: "TipoId");
 
             migrationBuilder.RenameIndex(
-                name: "IX_ProdutosFinanceiros_TipoProdutoFinanceiroId",
+                name: "IX_ProdutosFinanceiros_TipoProdutoId",
                 table: "ProdutosFinanceiros",
                 newName: "IX_ProdutosFinanceiros_TipoId");
 

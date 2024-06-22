@@ -12,11 +12,11 @@ namespace FinServ.Infra.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_AtivoFinanceiro_CarteiraInvestimento_CarteiraInvestimentoId",
-                table: "AtivoFinanceiro");
+                table: "Ativo");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_AtivoFinanceiro_ProdutosFinanceiros_ProdutoFinanceiroId",
-                table: "AtivoFinanceiro");
+                table: "Ativo");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_CarteiraInvestimento_ContasInvestimento_ContaId",
@@ -28,14 +28,14 @@ namespace FinServ.Infra.Migrations
 
             migrationBuilder.DropPrimaryKey(
                 name: "PK_AtivoFinanceiro",
-                table: "AtivoFinanceiro");
+                table: "Ativo");
 
             migrationBuilder.RenameTable(
                 name: "CarteiraInvestimento",
                 newName: "CarteirasInvestimento");
 
             migrationBuilder.RenameTable(
-                name: "AtivoFinanceiro",
+                name: "Ativo",
                 newName: "AtivosFinanceiros");
 
             migrationBuilder.RenameIndex(
@@ -54,7 +54,7 @@ namespace FinServ.Infra.Migrations
                 newName: "IX_AtivosFinanceiros_CarteiraInvestimentoId");
 
             migrationBuilder.AddColumn<int>(
-                name: "CodigoProdutoFinanceiro",
+                name: "CodigoProduto",
                 table: "TiposProdutoFinanceiro",
                 type: "int",
                 nullable: false,
@@ -125,7 +125,7 @@ namespace FinServ.Infra.Migrations
                 table: "AtivosFinanceiros");
 
             migrationBuilder.DropColumn(
-                name: "CodigoProdutoFinanceiro",
+                name: "CodigoProduto",
                 table: "TiposProdutoFinanceiro");
 
             migrationBuilder.DropColumn(
@@ -138,7 +138,7 @@ namespace FinServ.Infra.Migrations
 
             migrationBuilder.RenameTable(
                 name: "AtivosFinanceiros",
-                newName: "AtivoFinanceiro");
+                newName: "Ativo");
 
             migrationBuilder.RenameIndex(
                 name: "IX_CarteirasInvestimento_ContaId",
@@ -147,12 +147,12 @@ namespace FinServ.Infra.Migrations
 
             migrationBuilder.RenameIndex(
                 name: "IX_AtivosFinanceiros_ProdutoFinanceiroId",
-                table: "AtivoFinanceiro",
+                table: "Ativo",
                 newName: "IX_AtivoFinanceiro_ProdutoFinanceiroId");
 
             migrationBuilder.RenameIndex(
                 name: "IX_AtivosFinanceiros_CarteiraInvestimentoId",
-                table: "AtivoFinanceiro",
+                table: "Ativo",
                 newName: "IX_AtivoFinanceiro_CarteiraInvestimentoId");
 
             migrationBuilder.AddPrimaryKey(
@@ -162,19 +162,19 @@ namespace FinServ.Infra.Migrations
 
             migrationBuilder.AddPrimaryKey(
                 name: "PK_AtivoFinanceiro",
-                table: "AtivoFinanceiro",
+                table: "Ativo",
                 column: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AtivoFinanceiro_CarteiraInvestimento_CarteiraInvestimentoId",
-                table: "AtivoFinanceiro",
+                table: "Ativo",
                 column: "CarteiraInvestimentoId",
                 principalTable: "CarteiraInvestimento",
                 principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AtivoFinanceiro_ProdutosFinanceiros_ProdutoFinanceiroId",
-                table: "AtivoFinanceiro",
+                table: "Ativo",
                 column: "ProdutoFinanceiroId",
                 principalTable: "ProdutosFinanceiros",
                 principalColumn: "Id",
