@@ -1,6 +1,6 @@
-﻿namespace FinServ.Application.UseCases.Produtos.ObterProdutoPorCodigo
+﻿namespace FinServ.Application.UseCases.Produtos.ConsultarProdutoPorCodigo
 {
-    public class ObterProdutoPorCodigoResponse
+    public class ConsultarProdutoPorCodigoResponse
     {
         public string NomeAtivo { get; set; }
         public double TaxaJurosMensal { get; set; }

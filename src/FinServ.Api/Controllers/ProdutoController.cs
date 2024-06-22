@@ -1,5 +1,5 @@
 ﻿using FinServ.Application.UseCases.Produtos.CadastrarProdutos;
-using FinServ.Application.UseCases.Produtos.ObterProdutoPorCodigo;
+using FinServ.Application.UseCases.Produtos.ConsultarProdutoPorCodigo;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -48,10 +48,10 @@ namespace FinServ.Api.Controllers
             return Created(nameof(CadastrarProdutosAsync), response);
         }
 
-        [HttpGet("ObterProdutoPorCodigo")]
+        [HttpGet("ConsultarProdutoPorCodigo")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> ObterProdutoPorCodigoAsync([FromQuery] ObterProdutoPorCodigoRequest request)
+        public async Task<IActionResult> ObterProdutoPorCodigoAsync([FromQuery] ConsultarProdutoPorCodigoRequest request)
         {
             var response = await _mediator.Send(request);
 

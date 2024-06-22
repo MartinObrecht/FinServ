@@ -22,13 +22,13 @@ namespace FinServ.Application.UseCases.Produtos.CadastrarProdutos
 
         public async Task<CadastrarProdutosResponse> Handle(CadastrarProdutosRequest request, CancellationToken cancellationToken)
         {
-            var produtosFinanceiros = new List<Produto>();
+            var produtos = new List<Produto>();
 
             foreach (var produto in request.Produtos)
             {
                 var TipoProduto = await _tipoProdutoRepository.ObterPorCodigoProdutoAsync(produto.CodigoProduto);
 
-                produtosFinanceiros.Add(new Produto
+                produtos.Add(new Produto
                 {
                     DataVencimento = produto.DataVencimento,
                     Nome = produto.Nome,
@@ -38,7 +38,7 @@ namespace FinServ.Application.UseCases.Produtos.CadastrarProdutos
                 });
             }
 
-            await _produtoRepository.CadastrarEmLoteAsync(produtosFinanceiros);
+            await _produtoRepository.CadastrarEmLoteAsync(produtos);
 
             return new CadastrarProdutosResponse
             {

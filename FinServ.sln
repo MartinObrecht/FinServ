@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinServ.Application", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinServ.Api", "src\FinServ.Api\FinServ.Api.csproj", "{40AE75EC-1646-4FE7-8845-83427F2E9F09}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinServ.Tests", "src\FinServ.Tests\FinServ.Tests.csproj", "{575D042F-A7D2-4C7C-86C2-34A3CA937377}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{40AE75EC-1646-4FE7-8845-83427F2E9F09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40AE75EC-1646-4FE7-8845-83427F2E9F09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40AE75EC-1646-4FE7-8845-83427F2E9F09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{575D042F-A7D2-4C7C-86C2-34A3CA937377}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{575D042F-A7D2-4C7C-86C2-34A3CA937377}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{575D042F-A7D2-4C7C-86C2-34A3CA937377}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{575D042F-A7D2-4C7C-86C2-34A3CA937377}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
