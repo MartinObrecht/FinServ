@@ -9,9 +9,9 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY FinServ.Infra/FinServ.Infra.csproj /FinServ.Infra/
 COPY FinServ.Api/FinServ.Api.csproj /FinServ.Api/
 COPY FinServ.Application/FinServ.Application.csproj /FinServ.Application/
+COPY FinServ.Infra/FinServ.Infra.csproj /FinServ.Infra/
 COPY FinServ.Domain/FinServ.Domain.csproj /FinServ.Domain/
 
 RUN dotnet restore "/FinServ.Api/FinServ.Api.csproj"
