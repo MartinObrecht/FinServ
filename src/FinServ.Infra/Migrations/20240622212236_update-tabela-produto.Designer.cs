@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinServ.Infra.Migrations
 {
-    [DbContext(typeof(IFinServContext))]
+    [DbContext(typeof(FinServContext))]
     [Migration("20240622212236_update-tabela-produto")]
     partial class updatetabelaproduto
     {
