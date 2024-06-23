@@ -22,6 +22,7 @@ namespace FinServ.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddMediatR(config => config.RegisterServicesFromAssemblyContaining(typeof(CreateClienteRequest)));
+            builder.Services.AddAuthentication().AddBearerToken();
 
 
             builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
@@ -30,15 +31,16 @@ namespace FinServ.Api
             ValidatorOptions.Global.LanguageManager.Enabled = true;
             ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("pt-BR");
 
-            builder.Services.AddDbContext<FinServContext>(options =>
+            builder.Services.AddDbContext<IFinServContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING"));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
 
             builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
             builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
             builder.Services.AddScoped<IAtivoRepository, AtivoRepository>();
+            builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 
 
             var app = builder.Build();

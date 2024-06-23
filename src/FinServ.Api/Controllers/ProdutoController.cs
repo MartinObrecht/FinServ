@@ -6,10 +6,12 @@ using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using FinServ.Application.UseCases.Produtos.DeleteProduto;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FinServ.Api.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class ProdutoController : ControllerBase
     {
