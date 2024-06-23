@@ -34,19 +34,19 @@ jobs:
           tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_ed5f1340b63a48edb43321b36dd92edd }}/martinobrecht/finserv-api:${{ github.sha }}
           file: ./Dockerfile
 
-    deploy:
-      runs-on: ubuntu-latest
-      needs: build
-      environment:
-        name: 'production'
-        url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
-      steps:
-        - name: Deploy to Azure Web App
-          id: deploy-to-webapp
-          uses: azure/webapps-deploy@v2
-          with:
-            app-name: 'app-fin-serv'
-            slot-name: 'production'
-            publish-profile: ${{ secrets.AzureAppService_PublishProfile_3a6efacab96944a0b23c0a897b8867a4 }}
-            images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_ed5f1340b63a48edb43321b36dd92edd }}/martinobrecht/finserv-api:${{ github.sha }}'
+    steps:
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'app-fin-serv'
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_3a6efacab96944a0b23c0a897b8867a4 }}
+          images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_ed5f1340b63a48edb43321b36dd92edd }}/martinobrecht/finserv-api:${{ github.sha }}'
