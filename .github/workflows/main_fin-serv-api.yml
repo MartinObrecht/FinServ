@@ -49,4 +49,4 @@ jobs:
         app-name: 'fin-serv-api'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_f1f769c7e63e4edb8e23f4b17d5b9e16 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_fe768d99dd5d4511a8de092c8d1b7cd5 }}/martinobrecht/fin-serv-api:${{ github.sha }}'
+        images: 'docker.io/${{ secrets.AzureAppService_ContainerUsername_fe768d99dd5d4511a8de092c8d1b7cd5 }}/martinobrecht/fin-serv-api:${{ github.sha }}'
