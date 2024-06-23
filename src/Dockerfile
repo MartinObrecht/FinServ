@@ -9,19 +9,19 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR "/src"
-COPY ["FinServ.Api/FinServ.Api.csproj", "."]
-COPY ["FinServ.Application/FinServ.Application.csproj", "."]
-COPY ["FinServ.Domain/FinServ.Domain.csproj", "."]
-COPY ["FinServ.Infra/FinServ.Infra.csproj", "."]
+COPY ["FinServ.Api/*.csproj", "/FinServ.Api/"]
+COPY ["FinServ.Application/*.csproj", "/FinServ.Application/"]
+COPY ["FinServ.Domain/*csproj", "/FinServ.Domain/"]
+COPY ["FinServ.Infra/*.csproj", "/FinServ.Infra/"]
 
-RUN dotnet restore "FinServ.Api.csproj"
+RUN dotnet restore "/FinServ.Api/FinServ.Api.csproj"
 COPY . .
-WORKDIR "/src/FinServ.Api"
+WORKDIR "/src/FinServ.Api/"
 RUN dotnet build "FinServ.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./FinServ.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "FinServ.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
