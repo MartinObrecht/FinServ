@@ -17,11 +17,11 @@ COPY FinServ.Domain/FinServ.Domain.csproj /FinServ.Domain/
 RUN dotnet restore "/FinServ.Api/FinServ.Api.csproj"
 COPY . .
 WORKDIR "/src/FinServ.Api"
-RUN dotnet build "./FinServ.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build FinServ.Api.csproj -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./FinServ.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish FinServ.Api.csproj -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
