@@ -8,13 +8,13 @@ EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-COPY ["FinServ.Api/FinServ.Api.csproj", "src/FinServ.Api/"]
-COPY ["FinServ.Application/FinServ.Application.csproj", "src/FinServ.Application/"]
-COPY ["FinServ.Domain/FinServ.Domain.csproj", "src/FinServ.Domain/"]
-COPY ["FinServ.Infra/FinServ.Infra.csproj", "src/FinServ.Infra/"]
+WORKDIR "/src"
+COPY ["FinServ.Api/FinServ.Api.csproj", "/FinServ.Api/"]
+COPY ["FinServ.Application/FinServ.Application.csproj", "/FinServ.Application/"]
+COPY ["FinServ.Domain/FinServ.Domain.csproj", "/FinServ.Domain/"]
+COPY ["FinServ.Infra/FinServ.Infra.csproj", "/FinServ.Infra/"]
 
-RUN dotnet restore "./src/FinServ.Api/FinServ.Api.csproj"
+RUN dotnet restore "/FinServ.Api/FinServ.Api.csproj"
 COPY . .
 WORKDIR "/src/FinServ.Api"
 RUN dotnet build "./FinServ.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
