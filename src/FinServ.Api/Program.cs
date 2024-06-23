@@ -30,8 +30,7 @@ namespace FinServ.Api
             ValidatorOptions.Global.LanguageManager.Enabled = true;
             ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("pt-BR");
 
-            string connectionString = 
-            Environment.GetEnvironmentVariable("AZURE_SQL_CONNECTIONSTRING")!;
+            string connectionString = Environment.GetEnvironmentVariable("AZURE_SQL_CONNECTIONSTRING")!;
             builder.Services.AddDbContext<FinServContext>(options =>
             {
                 options.UseSqlServer(connectionString);
