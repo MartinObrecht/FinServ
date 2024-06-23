@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinServ.Infra.Migrations
 {
-    [DbContext(typeof(FinServContext))]
+    [DbContext(typeof(IFinServContext))]
     [Migration("20240622203051_Refatoracao")]
     partial class Refatoracao
     {

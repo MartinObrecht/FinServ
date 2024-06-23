@@ -8,10 +8,10 @@ namespace FinServ.Infra.Repositories
 {
     public class ClienteRepository : IClienteRepository
     {
-        private readonly FinServContext _context;
+        private readonly IFinServContext _context;
         private readonly ILogger<ClienteRepository> _logger;
 
-        public ClienteRepository(FinServContext context, ILogger<ClienteRepository> logger)
+        public ClienteRepository(IFinServContext context, ILogger<ClienteRepository> logger)
         {
             _context = context;
             _logger = logger;
