@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_9cef7b8fdbd9466fb5b30f9a538319ce }}/martinobrecht/fin-serv-api:${{ github.sha }}
-        file: ./src/Dockerfile
+        file: ./src/FinServ.Api/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
