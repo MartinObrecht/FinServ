@@ -31,7 +31,7 @@ namespace FinServ.Api
             ValidatorOptions.Global.LanguageManager.Enabled = true;
             ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("pt-BR");
 
-            builder.Services.AddDbContext<IFinServContext>(options =>
+            builder.Services.AddDbContext<FinServContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });

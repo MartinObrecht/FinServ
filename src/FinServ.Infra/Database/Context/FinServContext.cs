@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinServ.Infra.Database.Context
 {
-    public class IFinServContext : DbContext
+    public class FinServContext : DbContext
     {
-        public IFinServContext(DbContextOptions<IFinServContext> options) : base(options)
+        public FinServContext(DbContextOptions<FinServContext> options) : base(options)
         {
         }
 

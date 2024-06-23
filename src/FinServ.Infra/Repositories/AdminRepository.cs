@@ -5,9 +5,9 @@ namespace FinServ.Infra.Repositories
 {
     public class AdminRepository : IAdminRepository
     {
-        private readonly IFinServContext _context;
+        private readonly FinServContext _context;
 
-        public AdminRepository(IFinServContext context)
+        public AdminRepository(FinServContext context)
         {
             _context = context;
         }
