@@ -1,5 +1,6 @@
 ﻿using FinServ.Domain.Repositories;
 using FinServ.Infra.Database.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinServ.Infra.Repositories
 {
@@ -12,11 +13,11 @@ namespace FinServ.Infra.Repositories
             _context = context;
         }
 
-        public bool Autorization(string email, int codigoAcesso)
+        public async Task<bool> UserAutorizedAsync(string email, int codigoAcesso)
         {
             try
             {
-                var adminExiste = _context.Administradores.Any(a => a.Email == email && a.CodigoAcesso == codigoAcesso);
+                var adminExiste = await _context.Administradores.AnyAsync(a => a.Email == email && a.CodigoAcesso == codigoAcesso);
                 return adminExiste;
             }
             catch (Exception ex)

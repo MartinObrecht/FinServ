@@ -4,10 +4,7 @@ using FinServ.Domain.Interfaces;
 using FinServ.Domain.Repositories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.BearerToken;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Net;
 using System.Security.Claims;
 
 namespace FinServ.Api.Controllers
@@ -24,14 +21,15 @@ namespace FinServ.Api.Controllers
         }
 
         [HttpPost]
-        public IResult Login([FromBody] Admin request)
+        public async Task<IResult> Login([FromBody] Admin request)
         {
-            if (_adminRepository.Autorization(request.Email, request.CodigoAcesso))
+            bool usuarioAuthorized = await _adminRepository.UserAutorizedAsync(request.Email, request.CodigoAcesso);
+            if (usuarioAuthorized)
             {
                 var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Email, request.Email)                   
-                };
+                                {
+                                    new Claim(ClaimTypes.Email, request.Email)
+                                };
 
                 var claimsIdentity = new ClaimsIdentity(claims, BearerTokenDefaults.AuthenticationScheme);
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
