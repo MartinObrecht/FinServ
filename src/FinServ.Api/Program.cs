@@ -32,8 +32,9 @@ namespace FinServ.Api
 
             builder.Services.AddDbContext<FinServContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING"));
             });
+
 
             builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
             builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
