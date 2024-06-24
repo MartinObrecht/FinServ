@@ -1,4 +1,4 @@
-﻿using FinServ.Domain.Entities.Admin;
+using FinServ.Domain.Entities.Admin;
 
 namespace FinServ.Domain.Repositories
 {
