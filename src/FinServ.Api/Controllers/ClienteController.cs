@@ -1,4 +1,5 @@
-﻿using FinServ.Application.Handlers.Clientes.CreateCliente;
+﻿using FinServ.Application.Handlers.Ativos.BuyAtivoByCliente;
+using FinServ.Application.Handlers.Clientes.CreateCliente;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -45,6 +46,26 @@ namespace FinServ.Api.Controllers
             }
 
             return Created(nameof(CreateAsync), response);
+        }
+
+        [HttpPost("BuyAtivo")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> BuyAtivoAsync([FromBody] BuyAtivoByClienteRequest request)
+        {
+            var response = await _mediator.Send(request);
+
+            switch (response.CodigoRetorno)
+            {
+                case StatusCodes.Status400BadRequest:
+                    return BadRequest(response);
+                case StatusCodes.Status404NotFound:
+                    return NotFound(response);
+                case StatusCodes.Status500InternalServerError:
+                    return StatusCode(StatusCodes.Status500InternalServerError, response);
+            }
+
+            return Created(nameof(BuyAtivoAsync), response);
         }
     }
 }

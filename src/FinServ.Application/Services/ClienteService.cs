@@ -52,6 +52,15 @@ namespace FinServ.Application.Services
                 };
             }
 
+            if (quantidade - produto.Quantidade < 0)
+            {
+                return new BaseResult
+                {
+                    CodigoRetorno = StatusCodes.Status400BadRequest,
+                    Mensagem = "Quantidade insuficiente em estoque."
+                };
+            }
+
             var ativo = new Ativo
             {
                 ClienteId = idCliente,
@@ -64,7 +73,11 @@ namespace FinServ.Application.Services
 
             await _ativoRepository.AddAsync(ativo);
 
-            return new BaseResult { CodigoRetorno = StatusCodes.Status201Created, Mensagem = "Ativo comprado com sucesso!"};
+            return new BaseResult 
+            { 
+                CodigoRetorno = StatusCodes.Status201Created, 
+                Mensagem = "Ativo comprado com sucesso!"
+            };
         }
 
         public Task<BaseResult> VenderAtivoAsync(int clienteId)
