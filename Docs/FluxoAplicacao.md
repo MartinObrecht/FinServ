@@ -60,7 +60,7 @@ https://fin-serv-api.azurewebsites.net/api/Cliente/ExtratoAtivos?ClienteId=<Inte
 2 - Vender um Ativo
 
 ```
-{{baseUrl}}/api/Clientes/VenderAtivo?AtivoId=<integer>
+https://fin-serv-api.azurewebsites.net//api/Clientes/VenderAtivo?AtivoId=<integer>
 ```
 
 3 - Verificar extrato de ativos do cliente após a venda
@@ -80,12 +80,12 @@ https://fin-serv-api.azurewebsites.net/api/Produto/Disponiveis
 1 - Operações Crud de produtos para o administrador.
 
 ```
-{{baseUrl}}/api/Produtos
+https://fin-serv-api.azurewebsites.net//api/Produtos
 ```
 
 2 - Operação de produtos disponívels para o cliente.
 
 ```
-{{baseUrl}}/api/Produtos/Disponiveis
+https://fin-serv-api.azurewebsites.net//api/Produtos/Disponiveis
 ```
 
