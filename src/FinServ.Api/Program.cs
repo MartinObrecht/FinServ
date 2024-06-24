@@ -31,19 +31,12 @@ namespace FinServ.Api
             builder.Services.AddValidatorsFromAssemblyContaining<CreateClienteRequestValidator>();
 
             ValidatorOptions.Global.LanguageManager.Enabled = true;
-            ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("pt-BR");
-
-            string connectionString = Environment.GetEnvironmentVariable("AZURE_SQL_CONNECTIONSTRING");
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            }
+            ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("pt-BR");           
 
             builder.Services.AddDbContext<FinServContext>(options =>
             {
-                options.UseSqlServer(connectionString);
+                options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING"));
             });
-
 
             builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
             builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
@@ -62,7 +55,6 @@ namespace FinServ.Api
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
