@@ -2,6 +2,22 @@
 
 Desenvolvimento backend para um sistema de gestão de portfólio de investimentos.
 
+## 🔌 Tomada de Decisão
+
+- **Padrão CQRS (Command Query Responsibility Segregation):**
+    - Optei pelo padrão CQRS porque acredito que a separação de responsabilidades entre operações de leitura e escrita facilita a manutenção e evolução do sistema. Além disso, permite escalabilidade.
+    - Para a implementação do CQRS, estou utilizando a biblioteca MediatR, que simplifica o gerenciamento de comandos e queries. Ela também oferece suporte a injeção de dependências nos handlers e notificações de eventos.
+
+- **Abordagem Code First para o Banco de Dados:**
+    - Escolhi a abordagem Code First para a criação do banco de dados. Ela facilita a evolução do modelo de dados e permite a criação de scripts de migração para versionamento.
+    - Utilizo o Entity Framework Core para migrações de banco de dados e mapeamento de entidades.
+
+- **Deploy no Azure:**
+    - Realizei o deploy da aplicação no Azure usando os serviços Web App Services via Docker e Azure SQL.
+    - Minha próxima etapa é criar uma Azure Function para processar notificações de eventos e utilizar o Azure Service Bus para comunicação entre os microserviços.
+
+- **Pipeline de CI/CD no GitHub Actions:**
+    - Configurei um pipeline de CI/CD no GitHub Actions para realizar o build, atualizar a imagem no Docker Hub e fazer o deploy do projeto a cada push na branch master.
 
 ## 🚀 Começando
 
@@ -45,7 +61,7 @@ Para executar o projeto localmente, utilizando Docker, execute os comandos a par
 
 ## 📦 Implantação
 
-A implantação do projeto foi realizada no Azure, utilizando os serviços de Web App Services, através de uma imagem Docker, e banco de dados Azure SQL.
+A implantação do projeto foi realizada no Azure, utilizando os serviços de Web App Services, através de uma imagem Docker e banco de dados Azure SQL.
 
 Foi configurado um pipeline de CI/CD no Git Hub Actions, que realiza o build, atualiza a imagen no repositório Docker Hub(https://hub.docker.com/repository/docker/martinobrecht/fin-serv-api/general) e deploy do projeto a cada push na branch master.
 
