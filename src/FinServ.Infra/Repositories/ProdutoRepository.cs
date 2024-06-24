@@ -17,12 +17,14 @@ namespace FinServ.Infra.Repositories
             _logger = logger;
         }
 
-        public async Task RegisterAsync(Produto produto)
+        public async Task<Produto> AddAsync(Produto produto)
         {
             try
             {
                 await _context.Produtos.AddAsync(produto);
                 await _context.SaveChangesAsync();
+
+                return await Task.FromResult(produto);
             }
             catch (Exception ex)
             {
@@ -31,7 +33,7 @@ namespace FinServ.Infra.Repositories
             }
         }
 
-        public async Task RegisterInBatchAsync(IEnumerable<Produto?> produtos)
+        public async Task AddRangeAsync(IEnumerable<Produto?> produtos)
         {
             try
             {
@@ -45,16 +47,14 @@ namespace FinServ.Infra.Repositories
             }
         }
 
-        public async Task<IEnumerable<Produto>> GetByCodigoAsync(int codigoProduto)
+        public async Task<Produto?> GetByCodigoAsync(int codigoProduto)
         {
             try
             {
-                var Produtos = await _context.Produtos
-                    .Where(pf => pf.CodigoProduto == codigoProduto)
-                    .AsNoTracking()
-                    .ToListAsync();
+                var produto = await _context.Produtos
+                    .AsNoTracking().FirstOrDefaultAsync(x => x.CodigoProduto == codigoProduto);
 
-                return Produtos;
+                return produto;
             }
             catch (Exception ex)
             {
@@ -108,21 +108,6 @@ namespace FinServ.Infra.Repositories
             }
         }
 
-        public async Task UpdateAsync(Produto produto)
-        {
-            try
-            {
-                _context.Produtos.Update(produto);
-                await _context.SaveChangesAsync();
-
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Erro ao atualizar produto financeiro: {Produto}", produto);
-                throw new InvalidOperationException("Erro ao atualizar produto financeiro.", ex);
-            }
-        }
-
         public async Task DeleteAsync(Produto produto)
         {
             try
@@ -134,6 +119,20 @@ namespace FinServ.Infra.Repositories
             {
                 _logger.LogError(ex, "Erro ao remover produto financeiro: {Produto}", produto);
                 throw new InvalidOperationException("Erro ao remover produto financeiro.", ex);
+            }
+        }
+
+        public void Update(Produto entity)
+        {
+            try
+            {
+                _context.Produtos.Update(entity);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Erro ao atualizar produto financeiro: {Produto}", entity);
+                throw new InvalidOperationException("Erro ao atualizar produto financeiro.", e);
             }
         }
     }

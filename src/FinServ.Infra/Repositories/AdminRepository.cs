@@ -1,30 +1,34 @@
-﻿using FinServ.Domain.Repositories;
+﻿using FinServ.Domain.Entities.Admin;
+using FinServ.Domain.Repositories;
 using FinServ.Infra.Database.Context;
-using Microsoft.EntityFrameworkCore;
 
 namespace FinServ.Infra.Repositories
 {
     public class AdminRepository : IAdminRepository
     {
-        private readonly FinServContext _context;
-
-        public AdminRepository(FinServContext context)
+        public Task<Admin> AddAsync(Admin entity)
         {
-            _context = context;
+            throw new NotImplementedException();
         }
 
-        public async Task<bool> UserAutorizedAsync(string email, int codigoAcesso)
+        public Task DeleteAsync(Admin entity)
         {
-            try
-            {
-                var adminExiste = await _context.Administradores.AnyAsync(a => a.Email == email && a.CodigoAcesso == codigoAcesso);
-                return adminExiste;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Erro ao autenticar administrador: {ex.Message}");
-                return false;
-            }
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Admin>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Admin> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Admin entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

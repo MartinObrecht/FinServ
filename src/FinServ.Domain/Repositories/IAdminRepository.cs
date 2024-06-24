@@ -1,7 +1,8 @@
-﻿namespace FinServ.Domain.Repositories
+using FinServ.Domain.Entities.Admin;
+
+namespace FinServ.Domain.Repositories
 {
-    public interface IAdminRepository
+    public interface IAdminRepository : IRepository<Admin>
     {
-        Task<bool> UserAutorizedAsync(string email, int codigoAcesso);
     }
 }

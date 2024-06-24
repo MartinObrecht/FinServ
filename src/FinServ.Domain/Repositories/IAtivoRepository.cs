@@ -2,13 +2,9 @@
 
 namespace FinServ.Domain.Repositories
 {
-    public interface IAtivoRepository
+    public interface IAtivoRepository : IRepository<Ativo>
     {
-        Task<Ativo> GetAtivoByIdAsync(int id);
-        Task<IEnumerable<Ativo>> GetAtivosAsync();
-        Task<Ativo> CreateAtivoAsync(Ativo ativo);
-        Task<Ativo> UpdateAtivoAsync(Ativo ativo);
-        Task<Ativo> DeleteAtivoAsync(int id);
-
+        Task<IEnumerable<ExtratoAtivos>> GetAtivos(int clienteId);
+        Task<IEnumerable<Ativo>> GetProdutosExpiry(DateTime dataVencimentoProduto);
     }
 }

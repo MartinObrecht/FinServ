@@ -17,12 +17,13 @@ namespace FinServ.Infra.Repositories
             _logger = logger;
         }
 
-        public async Task AddClienteAsync(Cliente cliente)
+        public async Task<Cliente> AddAsync(Cliente cliente)
         {
             try
             {
                 await _context.Clientes.AddAsync(cliente);
                 await _context.SaveChangesAsync();
+                return cliente;
             }
             catch (Exception ex)
             {
@@ -31,12 +32,7 @@ namespace FinServ.Infra.Repositories
             }
         }
 
-        public Task<Cliente> DeleteClienteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Cliente?> GetClienteByCpfAsync(string cpf)
+        public async Task<Cliente?> GetByCpfAsync(string cpf)
         {
             try
             {
@@ -49,7 +45,7 @@ namespace FinServ.Infra.Repositories
             }
         }
 
-        public async Task<Cliente?> GetClienteByIdAsync(int id)
+        public async Task<Cliente?> GetByIdAsync(int id)
         {
             try
             {
@@ -62,12 +58,17 @@ namespace FinServ.Infra.Repositories
             }
         }
 
-        public Task<IEnumerable<Cliente>> GetClientesAsync()
+        public Task<IEnumerable<Cliente>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Cliente> UpdateClienteAsync(Cliente cliente)
+        public Task DeleteAsync(Cliente cliente)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Cliente entity)
         {
             throw new NotImplementedException();
         }

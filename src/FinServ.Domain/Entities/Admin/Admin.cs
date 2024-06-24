@@ -1,4 +1,4 @@
-﻿using FinServ.Domain.Interfaces;
+﻿using FinServ.Domain.Interfaces.Entities;
 
 namespace FinServ.Domain.Entities.Admin
 {

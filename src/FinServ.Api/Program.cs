@@ -1,4 +1,6 @@
-using FinServ.Application.UseCases.Clientes.CreateCliente;
+using FinServ.Application.Handlers.Clientes.CreateCliente;
+using FinServ.Application.Services;
+using FinServ.Application.Services.Interfaces;
 using FinServ.Domain.Repositories;
 using FinServ.Infra.Database.Context;
 using FinServ.Infra.Repositories;
@@ -41,6 +43,8 @@ namespace FinServ.Api
             builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
             builder.Services.AddScoped<IAtivoRepository, AtivoRepository>();
             builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+
+            builder.Services.AddScoped<IClienteService, ClienteService>();
 
 
             var app = builder.Build();

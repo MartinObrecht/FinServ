@@ -58,9 +58,6 @@ namespace FinServ.Infra.Migrations
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.Property<double>("ValorAtual")
-                        .HasColumnType("float");
-
                     b.Property<double>("ValorCompra")
                         .HasColumnType("float");
 
