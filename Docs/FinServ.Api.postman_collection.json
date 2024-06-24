@@ -1,0 +1,1376 @@
+{
+	"info": {
+		"_postman_id": "039e1b35-e1bf-4e60-92f1-abe63485c03e",
+		"name": "FinServ.Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14949270"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "Ativos",
+					"item": [
+						{
+							"name": "Obter",
+							"item": [
+								{
+									"name": "/api/Ativos/Obter",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Ativos/Obter?IdAtivo=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Ativos",
+												"Obter"
+											],
+											"query": [
+												{
+													"key": "IdAtivo",
+													"value": "<integer>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "//api/Ativos/Obter?IdAtivo=<integer>",
+													"path": [
+														"",
+														"api",
+														"Ativos",
+														"Obter"
+													],
+													"query": [
+														{
+															"key": "IdAtivo",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"mensagem\": \"<string>\",\n  \"idAtivo\": \"<integer>\",\n  \"valorCompra\": \"<double>\",\n  \"dataCompra\": \"<string>\",\n  \"quantidade\": \"<integer>\",\n  \"idCliente\": \"<integer>\",\n  \"idProduto\": \"<integer>\"\n}"
+										},
+										{
+											"name": "Server Error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Ativos/Obter?IdAtivo=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Ativos",
+														"Obter"
+													],
+													"query": [
+														{
+															"key": "IdAtivo",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Clientes",
+					"item": [
+						{
+							"name": "Registrar",
+							"item": [
+								{
+									"name": "/api/Clientes/Registrar",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"nome\": \"<string>\",\n  \"cpf\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Clientes/Registrar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Clientes",
+												"Registrar"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Created",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"nome\": \"<string>\",\n  \"cpf\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "//api/Clientes/Registrar",
+													"path": [
+														"",
+														"api",
+														"Clientes",
+														"Registrar"
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Server Error",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"nome\": \"<string>\",\n  \"cpf\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Clientes/Registrar",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Clientes",
+														"Registrar"
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "ComprarAtivo",
+							"item": [
+								{
+									"name": "/api/Clientes/ComprarAtivo",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"idCliente\": \"<integer>\",\n  \"codigoProduto\": \"<integer>\",\n  \"quantidade\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Clientes/ComprarAtivo",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Clientes",
+												"ComprarAtivo"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Created",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"idCliente\": \"<integer>\",\n  \"codigoProduto\": \"<integer>\",\n  \"quantidade\": \"<integer>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "//api/Clientes/ComprarAtivo",
+													"path": [
+														"",
+														"api",
+														"Clientes",
+														"ComprarAtivo"
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Server Error",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"idCliente\": \"<integer>\",\n  \"codigoProduto\": \"<integer>\",\n  \"quantidade\": \"<integer>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Clientes/ComprarAtivo",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Clientes",
+														"ComprarAtivo"
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "VenderAtivo",
+							"item": [
+								{
+									"name": "/api/Clientes/VenderAtivo",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Clientes/VenderAtivo?AtivoId=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Clientes",
+												"VenderAtivo"
+											],
+											"query": [
+												{
+													"key": "AtivoId",
+													"value": "<integer>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "//api/Clientes/VenderAtivo?AtivoId=<integer>",
+													"path": [
+														"",
+														"api",
+														"Clientes",
+														"VenderAtivo"
+													],
+													"query": [
+														{
+															"key": "AtivoId",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Clientes/VenderAtivo?AtivoId=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Clientes",
+														"VenderAtivo"
+													],
+													"query": [
+														{
+															"key": "AtivoId",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}"
+										},
+										{
+											"name": "Server Error",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Clientes/VenderAtivo?AtivoId=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Clientes",
+														"VenderAtivo"
+													],
+													"query": [
+														{
+															"key": "AtivoId",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "ExtratoAtivos",
+							"item": [
+								{
+									"name": "/api/Clientes/ExtratoAtivos",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Clientes/ExtratoAtivos?ClienteId=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Clientes",
+												"ExtratoAtivos"
+											],
+											"query": [
+												{
+													"key": "ClienteId",
+													"value": "<integer>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "//api/Clientes/ExtratoAtivos?ClienteId=<integer>",
+													"path": [
+														"",
+														"api",
+														"Clientes",
+														"ExtratoAtivos"
+													],
+													"query": [
+														{
+															"key": "ClienteId",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"nomeProduto\": \"<string>\",\n    \"descricaoProduto\": \"<string>\",\n    \"dataVencimentoProduto\": \"<string>\",\n    \"taxaJurosMes\": \"<double>\",\n    \"valorCompra\": \"<double>\",\n    \"valorAtual\": \"<double>\",\n    \"quantidade\": \"<integer>\",\n    \"dataCompra\": \"<string>\"\n  },\n  {\n    \"nomeProduto\": \"<string>\",\n    \"descricaoProduto\": \"<string>\",\n    \"dataVencimentoProduto\": \"<string>\",\n    \"taxaJurosMes\": \"<double>\",\n    \"valorCompra\": \"<double>\",\n    \"valorAtual\": \"<double>\",\n    \"quantidade\": \"<integer>\",\n    \"dataCompra\": \"<string>\"\n  }\n]"
+										},
+										{
+											"name": "Server Error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Clientes/ExtratoAtivos?ClienteId=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Clientes",
+														"ExtratoAtivos"
+													],
+													"query": [
+														{
+															"key": "ClienteId",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Notifications",
+					"item": [
+						{
+							"name": "ProdutosExpiracaoHoje",
+							"item": [
+								{
+									"name": "/api/Notifications/ProdutosExpiracaoHoje",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"dataVencimentoProduto\": \"<dateTime>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Notifications/ProdutosExpiracaoHoje",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Notifications",
+												"ProdutosExpiracaoHoje"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"dataVencimentoProduto\": \"<dateTime>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "//api/Notifications/ProdutosExpiracaoHoje",
+													"path": [
+														"",
+														"api",
+														"Notifications",
+														"ProdutosExpiracaoHoje"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Produtos",
+					"item": [
+						{
+							"name": "Registrar",
+							"item": [
+								{
+									"name": "/api/Produtos/Registrar",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"produtos\": [\n    {\n      \"nome\": \"<string>\",\n      \"valor\": \"<double>\",\n      \"taxaJurosMensal\": \"<double>\",\n      \"dataVencimento\": \"<dateTime>\",\n      \"quantidade\": \"<integer>\",\n      \"codigoProduto\": \"<integer>\",\n      \"descricao\": \"<string>\"\n    },\n    {\n      \"nome\": \"<string>\",\n      \"valor\": \"<double>\",\n      \"taxaJurosMensal\": \"<double>\",\n      \"dataVencimento\": \"<dateTime>\",\n      \"quantidade\": \"<integer>\",\n      \"codigoProduto\": \"<integer>\",\n      \"descricao\": \"<string>\"\n    }\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Produtos/Registrar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Produtos",
+												"Registrar"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Created",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"produtos\": [\n    {\n      \"nome\": \"<string>\",\n      \"valor\": \"<double>\",\n      \"taxaJurosMensal\": \"<double>\",\n      \"dataVencimento\": \"<dateTime>\",\n      \"quantidade\": \"<integer>\",\n      \"codigoProduto\": \"<integer>\",\n      \"descricao\": \"<string>\"\n    },\n    {\n      \"nome\": \"<string>\",\n      \"valor\": \"<double>\",\n      \"taxaJurosMensal\": \"<double>\",\n      \"dataVencimento\": \"<dateTime>\",\n      \"quantidade\": \"<integer>\",\n      \"codigoProduto\": \"<integer>\",\n      \"descricao\": \"<string>\"\n    }\n  ]\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "//api/Produtos/Registrar",
+													"path": [
+														"",
+														"api",
+														"Produtos",
+														"Registrar"
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Server Error",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"produtos\": [\n    {\n      \"nome\": \"<string>\",\n      \"valor\": \"<double>\",\n      \"taxaJurosMensal\": \"<double>\",\n      \"dataVencimento\": \"<dateTime>\",\n      \"quantidade\": \"<integer>\",\n      \"codigoProduto\": \"<integer>\",\n      \"descricao\": \"<string>\"\n    },\n    {\n      \"nome\": \"<string>\",\n      \"valor\": \"<double>\",\n      \"taxaJurosMensal\": \"<double>\",\n      \"dataVencimento\": \"<dateTime>\",\n      \"quantidade\": \"<integer>\",\n      \"codigoProduto\": \"<integer>\",\n      \"descricao\": \"<string>\"\n    }\n  ]\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Produtos/Registrar",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Produtos",
+														"Registrar"
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Obter",
+							"item": [
+								{
+									"name": "/api/Produtos/Obter",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Produtos/Obter?CodigoProduto=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Produtos",
+												"Obter"
+											],
+											"query": [
+												{
+													"key": "CodigoProduto",
+													"value": "<integer>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "//api/Produtos/Obter?CodigoProduto=<integer>",
+													"path": [
+														"",
+														"api",
+														"Produtos",
+														"Obter"
+													],
+													"query": [
+														{
+															"key": "CodigoProduto",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Produtos/Obter?CodigoProduto=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Produtos",
+														"Obter"
+													],
+													"query": [
+														{
+															"key": "CodigoProduto",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}"
+										},
+										{
+											"name": "Server Error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Produtos/Obter?CodigoProduto=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Produtos",
+														"Obter"
+													],
+													"query": [
+														{
+															"key": "CodigoProduto",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Disponiveis",
+							"item": [
+								{
+									"name": "/api/Produtos/Disponiveis",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Produtos/Disponiveis",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Produtos",
+												"Disponiveis"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "//api/Produtos/Disponiveis",
+													"path": [
+														"",
+														"api",
+														"Produtos",
+														"Disponiveis"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Produtos/Disponiveis",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Produtos",
+														"Disponiveis"
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}"
+										},
+										{
+											"name": "Server Error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Produtos/Disponiveis",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Produtos",
+														"Disponiveis"
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Atualizar",
+							"item": [
+								{
+									"name": "/api/Produtos/Atualizar",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"idProduto\": \"<integer>\",\n  \"nome\": \"<string>\",\n  \"valor\": \"<double>\",\n  \"codigoProduto\": \"<integer>\",\n  \"taxaJurosMensal\": \"<double>\",\n  \"dataVencimento\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"quantidade\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Produtos/Atualizar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Produtos",
+												"Atualizar"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"idProduto\": \"<integer>\",\n  \"nome\": \"<string>\",\n  \"valor\": \"<double>\",\n  \"codigoProduto\": \"<integer>\",\n  \"taxaJurosMensal\": \"<double>\",\n  \"dataVencimento\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"quantidade\": \"<integer>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "//api/Produtos/Atualizar",
+													"path": [
+														"",
+														"api",
+														"Produtos",
+														"Atualizar"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"idProduto\": \"<integer>\",\n  \"nome\": \"<string>\",\n  \"valor\": \"<double>\",\n  \"codigoProduto\": \"<integer>\",\n  \"taxaJurosMensal\": \"<double>\",\n  \"dataVencimento\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"quantidade\": \"<integer>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Produtos/Atualizar",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Produtos",
+														"Atualizar"
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}"
+										},
+										{
+											"name": "Server Error",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"idProduto\": \"<integer>\",\n  \"nome\": \"<string>\",\n  \"valor\": \"<double>\",\n  \"codigoProduto\": \"<integer>\",\n  \"taxaJurosMensal\": \"<double>\",\n  \"dataVencimento\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"quantidade\": \"<integer>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Produtos/Atualizar",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Produtos",
+														"Atualizar"
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Remover",
+							"item": [
+								{
+									"name": "/api/Produtos/Remover",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Produtos/Remover?IdProduto=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Produtos",
+												"Remover"
+											],
+											"query": [
+												{
+													"key": "IdProduto",
+													"value": "<integer>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "No Content",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "//api/Produtos/Remover?IdProduto=<integer>",
+													"path": [
+														"",
+														"api",
+														"Produtos",
+														"Remover"
+													],
+													"query": [
+														{
+															"key": "IdProduto",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Produtos/Remover?IdProduto=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Produtos",
+														"Remover"
+													],
+													"query": [
+														{
+															"key": "IdProduto",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}"
+										},
+										{
+											"name": "Server Error",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Produtos/Remover?IdProduto=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Produtos",
+														"Remover"
+													],
+													"query": [
+														{
+															"key": "IdProduto",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://fin-serv-api.azurewebsites.net/"
+		}
+	]
+}
