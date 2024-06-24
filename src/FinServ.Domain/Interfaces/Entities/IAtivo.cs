@@ -1,6 +1,5 @@
 ﻿using FinServ.Domain.Entities.Clientes;
 using FinServ.Domain.Entities.Produtos;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FinServ.Domain.Interfaces.Entities
 {
@@ -13,8 +12,6 @@ namespace FinServ.Domain.Interfaces.Entities
         Cliente Cliente { get; set; }
         int ProdutoId { get; set; }
         Produto Produto { get; set; }
-
-        [NotMapped]
         double ValorAtual { get; set; }
     }
 }

@@ -5,8 +5,8 @@ namespace FinServ.Application.Services.Interfaces
 {
     public interface IClienteService
     {
-        Task<BaseResult> ComprarAtivoAsync(int idCliente, int codigoProduto, double valorCompra, int quantidade);
-        Task<BaseResult> VenderAtivoAsync(int clienteId);
+        Task<BaseResult> ComprarAtivoAsync(int idCliente, int codigoProduto, int quantidade);
+        Task<BaseResult> VenderAtivoAsync(int IdAtivo);
 
     }
 }

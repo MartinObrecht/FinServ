@@ -26,7 +26,7 @@ namespace FinServ.Infra.Repositories
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(Admin entity)
+        public void Update(Admin entity)
         {
             throw new NotImplementedException();
         }

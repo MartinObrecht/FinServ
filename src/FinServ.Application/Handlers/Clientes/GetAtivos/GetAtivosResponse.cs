@@ -1,8 +1,7 @@
-﻿namespace FinServ.Application.Handlers.Ativos.GetAtivosByCliente
+﻿namespace FinServ.Application.Handlers.Clientes.GetAtivos
 {
-    public class GetAtivosByClienteResponse
+    public class GetAtivosResponse
     {
-        public string NomeCliente { get; set; }
         public string NomeProduto { get; set; }
         public string DescricaoProduto { get; set; }
         public string DataVencimentoProduto { get; set; }

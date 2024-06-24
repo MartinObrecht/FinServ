@@ -24,7 +24,7 @@ namespace FinServ.Api.Controllers
             _cadastrarProdutosFinanceirosValidator = cadastrarProdutosFinanceirosValidator;
         }
 
-        [HttpPost("Register")]
+        [HttpPost("Registrar")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AddAsync([FromBody] CreateProdutosRequest request)
@@ -51,7 +51,7 @@ namespace FinServ.Api.Controllers
             return Created(nameof(AddAsync), response);
         }
 
-        [HttpGet("GetByCodigo")]
+        [HttpGet("Obter")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -59,15 +59,18 @@ namespace FinServ.Api.Controllers
         {
             var response = await _mediator.Send(request);
 
-            if (response.Count == 0)
+            switch (response.CodigoRetorno)
             {
-                return NotFound();
+                case StatusCodes.Status404NotFound:
+                    return NotFound(response);
+                case StatusCodes.Status500InternalServerError:
+                    return StatusCode(StatusCodes.Status500InternalServerError, response);
             }
 
             return Ok(response);
         }
 
-        [HttpGet("GetAvailable")]
+        [HttpGet("Disponiveis")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -85,7 +88,7 @@ namespace FinServ.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPut("Update")]
+        [HttpPut("Atualizar")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -101,7 +104,7 @@ namespace FinServ.Api.Controllers
             return Ok(response);
         }
 
-        [HttpDelete("Remove")]
+        [HttpDelete("Remover")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

@@ -2,7 +2,7 @@
 
 namespace FinServ.Application.Handlers.Produtos.QueryProdutoByCodigo
 {
-    public class QueryProdutoByCodigoRequest : IRequest<IList<QueryProdutoByCodigoResponse>>
+    public class QueryProdutoByCodigoRequest : IRequest<QueryProdutoByCodigoResponse>
     {
         public int CodigoProduto { get; set; }
     }

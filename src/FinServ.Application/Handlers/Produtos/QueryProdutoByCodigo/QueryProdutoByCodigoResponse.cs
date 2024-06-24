@@ -1,6 +1,8 @@
-﻿namespace FinServ.Application.Handlers.Produtos.QueryProdutoByCodigo
+﻿using FinServ.Application.Models.Results;
+
+namespace FinServ.Application.Handlers.Produtos.QueryProdutoByCodigo
 {
-    public class QueryProdutoByCodigoResponse
+    public class QueryProdutoByCodigoResponse : BaseResult
     {
         public int IdProduto { get; set; }
         public string Nome { get; set; }

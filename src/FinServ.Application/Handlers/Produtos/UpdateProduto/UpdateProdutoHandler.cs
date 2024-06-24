@@ -40,7 +40,7 @@ namespace FinServ.Application.Handlers.Produtos.UpdateProduto
             produto.Descricao = request.Descricao;
             produto.Valor = request.Valor;
 
-            await _produtoRepository.UpdateAsync(produto);
+            _produtoRepository.Update(produto);
 
             var response = new UpdateProdutoResponse
             {

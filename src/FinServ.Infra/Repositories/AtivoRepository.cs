@@ -8,37 +8,53 @@ namespace FinServ.Infra.Repositories
 {
     public class AtivoRepository : IAtivoRepository
     {
-        private readonly FinServContext _dbContext;
+        private readonly FinServContext _context;
         private readonly IProdutoRepository _produtoRepository;
         private readonly IClienteRepository _clienteRepository;
         private readonly ILogger<AtivoRepository> _logger;
 
-        public AtivoRepository(FinServContext dbContext, IProdutoRepository produtoRepository, IClienteRepository clienteRepository, ILogger<AtivoRepository> logger)
+        public AtivoRepository(FinServContext context, IProdutoRepository produtoRepository, IClienteRepository clienteRepository, ILogger<AtivoRepository> logger)
         {
-            _dbContext = dbContext;
+            _context = context;
             _produtoRepository = produtoRepository;
             _clienteRepository = clienteRepository;
             _logger = logger;
         }
 
-        public Task<Ativo> AddAsync(Ativo entity)
+        public async Task<Ativo> AddAsync(Ativo entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await Task.Run(() =>
+                {
+                    _context.Ativos.Add(entity);
+                    _context.SaveChanges();
+                });
+
+                return await Task.FromResult(entity);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao cadastrar ativo: {Ativo}", entity);
+                throw new InvalidOperationException("Erro ao cadastrar ativo.", ex);
+            }
         }
 
-        public Task<Ativo> CreateAtivoAsync(Ativo ativo)
+        public async Task DeleteAsync(Ativo entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Ativo> DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteAsync(Ativo entity)
-        {
-            throw new NotImplementedException();
+            try
+            {
+                await Task.Run(() =>
+                {
+                    _context.Ativos.Remove(entity);
+                    _context.SaveChanges();
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao deletar ativo: {Ativo}", entity);
+                throw new InvalidOperationException("Erro ao deletar ativo.", ex);
+            }
         }
 
         public Task<IEnumerable<Ativo>> GetAllAsync()
@@ -46,11 +62,12 @@ namespace FinServ.Infra.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<ExtratoAtivos>> CreateAsync(int clienteId)
+        public async Task<IEnumerable<ExtratoAtivos>> GetAtivos(int clienteId)
         {
             try
             {
-                var extratos = await _dbContext.Ativos
+                var extratos = await _context.Ativos
+                    .AsNoTracking()
                     .Include(a => a.Produto)
                     .Include(a => a.Cliente)
                     .Where(a => a.ClienteId == clienteId)
@@ -77,17 +94,38 @@ namespace FinServ.Infra.Repositories
             }
         }
 
-        public Task<Ativo> GetByIdAsync(int id)
+        public async Task<Ativo> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _context.Ativos.FindAsync(id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao buscar ativo por id: {Id}", id);
+                throw new InvalidOperationException("Erro ao buscar ativo por id.", ex);
+            }
+            
         }
 
-        public Task<Ativo> UpdateAsync(Ativo ativo)
+        public async Task<IEnumerable<Ativo>> GetProdutosExpiry(DateTime dataVencimentoProduto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _context.Ativos
+                    .AsNoTracking()
+                    .Include(a => a.Produto)
+                    .Where(a => a.Produto.DataVencimento == dataVencimentoProduto)
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao buscar ativos com produtos próximos do vencimento");
+                throw new InvalidOperationException("Erro ao buscar ativos com produtos próximos do vencimento", ex);
+            }
         }
 
-        Task IRepository<Ativo>.UpdateAsync(Ativo entity)
+        public void Update(Ativo entity)
         {
             throw new NotImplementedException();
         }

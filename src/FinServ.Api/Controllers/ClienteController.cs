@@ -1,5 +1,7 @@
-﻿using FinServ.Application.Handlers.Ativos.BuyAtivoByCliente;
+﻿using FinServ.Application.Handlers.Clientes.BuyAtivo;
 using FinServ.Application.Handlers.Clientes.CreateCliente;
+using FinServ.Application.Handlers.Clientes.GetAtivos;
+using FinServ.Application.Handlers.Clientes.SellAtivo;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +23,7 @@ namespace FinServ.Api.Controllers
             _cadastrarClienteValidator = cadastrarClienteValidator;
         }
 
-        [HttpPost("Register")]
+        [HttpPost("Registrar")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> CreateAsync([FromBody] CreateClienteRequest request)
@@ -48,10 +50,10 @@ namespace FinServ.Api.Controllers
             return Created(nameof(CreateAsync), response);
         }
 
-        [HttpPost("BuyAtivo")]
+        [HttpPost("ComprarAtivo")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> BuyAtivoAsync([FromBody] BuyAtivoByClienteRequest request)
+        public async Task<IActionResult> BuyAtivoAsync([FromBody] BuyAtivoRequest request)
         {
             var response = await _mediator.Send(request);
 
@@ -66,6 +68,42 @@ namespace FinServ.Api.Controllers
             }
 
             return Created(nameof(BuyAtivoAsync), response);
+        }
+
+        [HttpDelete("VenderAtivo")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> SellAtivoAsync([FromQuery] SellAtivoRequest request)
+        {
+            var response = await _mediator.Send(request);
+
+            switch (response.CodigoRetorno)
+            {
+                case StatusCodes.Status400BadRequest:
+                    return BadRequest(response);
+                case StatusCodes.Status404NotFound:
+                    return NotFound(response);
+                case StatusCodes.Status500InternalServerError:
+                    return StatusCode(StatusCodes.Status500InternalServerError, response);
+            }
+
+            return Ok(response);
+        }
+
+        [HttpGet("ExtratoAtivos")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<GetAtivosResponse>>> GetByClienteAsync([FromQuery] GetAtivosRequest request)
+        {
+            var response = await _mediator.Send(request);
+
+            if (!response.Any())
+            {
+                return NotFound();
+            }
+            return Ok(response);
+
         }
     }
 }

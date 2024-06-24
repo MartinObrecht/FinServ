@@ -2,31 +2,28 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FinServ.Application.Handlers.Ativos.GetAtivosByCliente
+namespace FinServ.Application.Handlers.Clientes.GetAtivos
 {
-    public class GetAtivosByClienteHandler : IRequestHandler<GetAtivosByClienteRequest, IList<GetAtivosByClienteResponse>>
+    public class GetAtivosHandler : IRequestHandler<GetAtivosRequest, IList<GetAtivosResponse>>
     {
-        private readonly IMediator _mediator;
         private readonly IAtivoRepository _ativoRepository;
-        private readonly ILogger<GetAtivosByClienteHandler> _logger;
+        private readonly ILogger<GetAtivosHandler> _logger;
 
-        public GetAtivosByClienteHandler(IMediator mediator, IAtivoRepository ativoRepository, ILogger<GetAtivosByClienteHandler> logger)
+        public GetAtivosHandler(IAtivoRepository ativoRepository, ILogger<GetAtivosHandler> logger)
         {
-            _mediator = mediator;
             _ativoRepository = ativoRepository;
             _logger = logger;
         }
 
-        public async Task<IList<GetAtivosByClienteResponse>> Handle(GetAtivosByClienteRequest request, CancellationToken cancellationToken)
+        public async Task<IList<GetAtivosResponse>> Handle(GetAtivosRequest request, CancellationToken cancellationToken)
         {
-            var ativos = await _ativoRepository.CreateAsync(request.ClienteId);
+            var ativos = await _ativoRepository.GetAtivos(request.ClienteId);
 
-            var response = new List<GetAtivosByClienteResponse>();
+            var response = new List<GetAtivosResponse>();
             foreach (var ativo in ativos)
             {
-                response.Add(new GetAtivosByClienteResponse
+                response.Add(new GetAtivosResponse
                 {
-                    NomeCliente = ativo.NomeCliente,
                     NomeProduto = ativo.NomeProduto,
                     DescricaoProduto = ativo.DescricaoProduto,
                     DataVencimentoProduto = ativo.DataVencimentoProduto.ToShortDateString(),

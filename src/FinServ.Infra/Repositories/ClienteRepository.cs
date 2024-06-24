@@ -63,12 +63,12 @@ namespace FinServ.Infra.Repositories
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(Cliente cliente)
+        public Task DeleteAsync(Cliente cliente)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteAsync(Cliente cliente)
+        public void Update(Cliente entity)
         {
             throw new NotImplementedException();
         }

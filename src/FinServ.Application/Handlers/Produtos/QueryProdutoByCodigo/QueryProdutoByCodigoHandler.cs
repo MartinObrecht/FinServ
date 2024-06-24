@@ -1,10 +1,11 @@
 ﻿using FinServ.Domain.Repositories;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace FinServ.Application.Handlers.Produtos.QueryProdutoByCodigo
 {
-    public class QueryProdutoByCodigoHandler : IRequestHandler<QueryProdutoByCodigoRequest, IList<QueryProdutoByCodigoResponse>>
+    public class QueryProdutoByCodigoHandler : IRequestHandler<QueryProdutoByCodigoRequest, QueryProdutoByCodigoResponse>
     {
         private readonly IMediator _mediator;
         private readonly IProdutoRepository _produtoRepository;
@@ -17,29 +18,30 @@ namespace FinServ.Application.Handlers.Produtos.QueryProdutoByCodigo
             _logger = logger;
         }
 
-        public async Task<IList<QueryProdutoByCodigoResponse>> Handle(QueryProdutoByCodigoRequest request, CancellationToken cancellationToken)
+        public async Task<QueryProdutoByCodigoResponse> Handle(QueryProdutoByCodigoRequest request, CancellationToken cancellationToken)
         {
-            var Produtos = await _produtoRepository.GetByCodigoAsync(request.CodigoProduto);
+            var produto = await _produtoRepository.GetByCodigoAsync(request.CodigoProduto);
 
-            var response = new List<QueryProdutoByCodigoResponse>();
-
-
-            foreach (var produto in Produtos)
-            {
-                response.Add(new QueryProdutoByCodigoResponse
+            if (produto == null) {
+                return new QueryProdutoByCodigoResponse
                 {
-                    IdProduto = produto.Id,
-                    Nome = produto.Nome,
-                    TaxaJurosMensal = produto.TaxaJurosMensal,
-                    DataVencimento = produto.DataVencimento,
-                    Quantidade = produto.Quantidade,
-                    CodigoProduto = produto.CodigoProduto,
-                    Descricao = produto.Descricao
-                });
+                    Mensagem = "Produto não encontrado",
+                    CodigoRetorno = StatusCodes.Status404NotFound
+                };
             }
 
-            return response;
-
+            return new QueryProdutoByCodigoResponse
+            {
+                IdProduto = produto.Id,
+                Nome = produto.Nome,
+                TaxaJurosMensal = produto.TaxaJurosMensal,
+                DataVencimento = produto.DataVencimento,
+                Quantidade = produto.Quantidade,
+                CodigoProduto = produto.CodigoProduto,
+                Descricao = produto.Descricao,
+                Mensagem = "Produto encontrado com sucesso",
+                CodigoRetorno = StatusCodes.Status200OK
+            };
         }
     }
 }
