@@ -11,13 +11,13 @@ namespace FinServ.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProdutoController : ControllerBase
+    public class ProdutosController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly ILogger<ProdutoController> _logger;
+        private readonly ILogger<ProdutosController> _logger;
         private readonly IValidator<CreateProdutosRequest> _cadastrarProdutosFinanceirosValidator;
 
-        public ProdutoController(IMediator mediator, ILogger<ProdutoController> logger, IValidator<CreateProdutosRequest> cadastrarProdutosFinanceirosValidator)
+        public ProdutosController(IMediator mediator, ILogger<ProdutosController> logger, IValidator<CreateProdutosRequest> cadastrarProdutosFinanceirosValidator)
         {
             _mediator = mediator;
             _logger = logger;

@@ -6,12 +6,12 @@ namespace FinServ.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AtivoController : ControllerBase
+    public class AtivosController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly ILogger<AtivoController> _logger;
+        private readonly ILogger<AtivosController> _logger;
 
-        public AtivoController(IMediator mediator, ILogger<AtivoController> logger)
+        public AtivosController(IMediator mediator, ILogger<AtivosController> logger)
         {
             _mediator = mediator;
             _logger = logger;

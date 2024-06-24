@@ -10,13 +10,13 @@ namespace FinServ.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClienteController : ControllerBase
+    public class ClientesController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly ILogger<ClienteController> _logger;
+        private readonly ILogger<ClientesController> _logger;
         private readonly IValidator<CreateClienteRequest> _cadastrarClienteValidator;
 
-        public ClienteController(IMediator mediator, ILogger<ClienteController> logger, IValidator<CreateClienteRequest> cadastrarClienteValidator)
+        public ClientesController(IMediator mediator, ILogger<ClientesController> logger, IValidator<CreateClienteRequest> cadastrarClienteValidator)
         {
             _mediator = mediator;
             _logger = logger;

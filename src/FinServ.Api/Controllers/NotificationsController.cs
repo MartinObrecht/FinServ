@@ -7,12 +7,12 @@ namespace FinServ.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class NotificationController : ControllerBase
+    public class NotificationsController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly ILogger<NotificationController> _logger;
+        private readonly ILogger<NotificationsController> _logger;
 
-        public NotificationController(IMediator mediator, ILogger<NotificationController> logger)
+        public NotificationsController(IMediator mediator, ILogger<NotificationsController> logger)
         {
             _mediator = mediator;
             _logger = logger;
