@@ -1,4 +1,4 @@
-﻿using FinServ.Application.UseCases.Clientes.CreateCliente;
+﻿using FinServ.Application.Handlers.Clientes.CreateCliente;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -20,10 +20,10 @@ namespace FinServ.Api.Controllers
             _cadastrarClienteValidator = cadastrarClienteValidator;
         }
 
-        [HttpPost("CreateCliente")]
+        [HttpPost("Register")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> CreateClinteAsync([FromBody] CreateClienteRequest request)
+        public async Task<IActionResult> CreateAsync([FromBody] CreateClienteRequest request)
         {
             var validationResult = _cadastrarClienteValidator.ValidateAsync(request);
 
@@ -44,7 +44,7 @@ namespace FinServ.Api.Controllers
                     return StatusCode(StatusCodes.Status500InternalServerError, response);
             }
 
-            return Created(nameof(CreateClinteAsync), response);
+            return Created(nameof(CreateAsync), response);
         }
     }
 }

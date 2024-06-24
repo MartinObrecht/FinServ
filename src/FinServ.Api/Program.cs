@@ -1,4 +1,4 @@
-using FinServ.Application.UseCases.Clientes.CreateCliente;
+using FinServ.Application.Handlers.Clientes.CreateCliente;
 using FinServ.Domain.Repositories;
 using FinServ.Infra.Database.Context;
 using FinServ.Infra.Repositories;
@@ -31,7 +31,7 @@ namespace FinServ.Api
             ValidatorOptions.Global.LanguageManager.Enabled = true;
             ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("pt-BR");
 
-            builder.Services.AddDbContext<IFinServContext>(options =>
+            builder.Services.AddDbContext<FinServContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });

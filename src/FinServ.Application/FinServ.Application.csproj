@@ -15,8 +15,4 @@
     <ProjectReference Include="..\FinServ.Domain\FinServ.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\Interfaces\" />
-  </ItemGroup>
-
 </Project>

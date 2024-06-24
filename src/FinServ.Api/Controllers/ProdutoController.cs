@@ -1,17 +1,15 @@
-﻿using FinServ.Application.UseCases.Produtos.CreateProdutos;
-using FinServ.Application.UseCases.Produtos.QueryProdutoByCodigo;
-using FinServ.Application.UseCases.Produtos.QueryAvailableProdutos;
-using FinServ.Application.UseCases.Produtos.UpdateProduto;
-using FluentValidation;
+﻿using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using FinServ.Application.UseCases.Produtos.DeleteProduto;
-using Microsoft.AspNetCore.Authorization;
+using FinServ.Application.Handlers.Produtos.CreateProdutos;
+using FinServ.Application.Handlers.Produtos.DeleteProduct;
+using FinServ.Application.Handlers.Produtos.QueryProdutoByCodigo;
+using FinServ.Application.Handlers.Produtos.UpdateProduto;
+using FinServ.Application.Handlers.Produtos.QueryAvailableProdutos;
 
 namespace FinServ.Api.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
     [ApiController]
     public class ProdutoController : ControllerBase
     {
@@ -29,7 +27,7 @@ namespace FinServ.Api.Controllers
         [HttpPost("Register")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> RegisterAsync([FromBody] CreateProdutosRequest request)
+        public async Task<IActionResult> AddAsync([FromBody] CreateProdutosRequest request)
         {
             var validationResult = _cadastrarProdutosFinanceirosValidator.ValidateAsync(request);
 
@@ -50,7 +48,7 @@ namespace FinServ.Api.Controllers
                     return StatusCode(StatusCodes.Status500InternalServerError, response);
             }
 
-            return Created(nameof(RegisterAsync), response);
+            return Created(nameof(AddAsync), response);
         }
 
         [HttpGet("GetByCodigo")]

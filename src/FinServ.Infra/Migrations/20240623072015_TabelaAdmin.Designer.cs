@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinServ.Infra.Migrations
 {
-    [DbContext(typeof(IFinServContext))]
+    [DbContext(typeof(FinServContext))]
     [Migration("20240623072015_TabelaAdmin")]
     partial class TabelaAdmin
     {

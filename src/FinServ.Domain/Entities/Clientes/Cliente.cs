@@ -1,5 +1,5 @@
 ﻿using FinServ.Domain.Entities.Ativos;
-using FinServ.Domain.Interfaces;
+using FinServ.Domain.Interfaces.Entities;
 
 namespace FinServ.Domain.Entities.Clientes
 {

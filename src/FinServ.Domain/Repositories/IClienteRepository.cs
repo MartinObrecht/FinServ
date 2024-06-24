@@ -2,13 +2,13 @@
 
 namespace FinServ.Domain.Repositories
 {
-    public interface IClienteRepository
+    public interface IClienteRepository : IRepository<Cliente>
     {
-        Task<Cliente> GetClienteByIdAsync(int id);
-        Task<Cliente> GetClienteByCpfAsync(string cpf);
-        Task<IEnumerable<Cliente>> GetClientesAsync();
-        Task AddClienteAsync(Cliente cliente);
-        Task<Cliente> UpdateClienteAsync(Cliente cliente);
-        Task<Cliente> DeleteClienteAsync(int id);
+        Task<Cliente?> GetByIdAsync(int id);
+        Task<Cliente?> GetByCpfAsync(string cpf);
+        Task<IEnumerable<Cliente>> GetAllAsync();
+        Task<Cliente> AddAsync(Cliente cliente);
+        Task UpdateAsync(Cliente cliente);
+        Task DeleteAsync(Cliente cliente);
     }
 }

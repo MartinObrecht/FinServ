@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinServ.Infra.Migrations
 {
-    [DbContext(typeof(IFinServContext))]
+    [DbContext(typeof(FinServContext))]
     partial class FinServContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

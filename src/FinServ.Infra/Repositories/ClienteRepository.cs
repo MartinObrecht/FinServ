@@ -8,21 +8,22 @@ namespace FinServ.Infra.Repositories
 {
     public class ClienteRepository : IClienteRepository
     {
-        private readonly IFinServContext _context;
+        private readonly FinServContext _context;
         private readonly ILogger<ClienteRepository> _logger;
 
-        public ClienteRepository(IFinServContext context, ILogger<ClienteRepository> logger)
+        public ClienteRepository(FinServContext context, ILogger<ClienteRepository> logger)
         {
             _context = context;
             _logger = logger;
         }
 
-        public async Task AddClienteAsync(Cliente cliente)
+        public async Task<Cliente> AddAsync(Cliente cliente)
         {
             try
             {
                 await _context.Clientes.AddAsync(cliente);
                 await _context.SaveChangesAsync();
+                return cliente;
             }
             catch (Exception ex)
             {
@@ -31,12 +32,7 @@ namespace FinServ.Infra.Repositories
             }
         }
 
-        public Task<Cliente> DeleteClienteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Cliente?> GetClienteByCpfAsync(string cpf)
+        public async Task<Cliente?> GetByCpfAsync(string cpf)
         {
             try
             {
@@ -49,7 +45,7 @@ namespace FinServ.Infra.Repositories
             }
         }
 
-        public async Task<Cliente?> GetClienteByIdAsync(int id)
+        public async Task<Cliente?> GetByIdAsync(int id)
         {
             try
             {
@@ -62,12 +58,17 @@ namespace FinServ.Infra.Repositories
             }
         }
 
-        public Task<IEnumerable<Cliente>> GetClientesAsync()
+        public Task<IEnumerable<Cliente>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Cliente> UpdateClienteAsync(Cliente cliente)
+        public Task UpdateAsync(Cliente cliente)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(Cliente cliente)
         {
             throw new NotImplementedException();
         }

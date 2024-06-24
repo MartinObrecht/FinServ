@@ -8,21 +8,22 @@ namespace FinServ.Infra.Repositories
 {
     public class ProdutoRepository : IProdutoRepository
     {
-        private readonly IFinServContext _context;
+        private readonly FinServContext _context;
         private readonly ILogger<IClienteRepository> _logger;
 
-        public ProdutoRepository(IFinServContext context, ILogger<IClienteRepository> logger)
+        public ProdutoRepository(FinServContext context, ILogger<IClienteRepository> logger)
         {
             _context = context;
             _logger = logger;
         }
 
-        public async Task RegisterAsync(Produto produto)
+        public async Task<Produto> AddAsync(Produto produto)
         {
             try
             {
                 await _context.Produtos.AddAsync(produto);
                 await _context.SaveChangesAsync();
+                return produto;
             }
             catch (Exception ex)
             {
@@ -31,7 +32,7 @@ namespace FinServ.Infra.Repositories
             }
         }
 
-        public async Task RegisterInBatchAsync(IEnumerable<Produto?> produtos)
+        public async Task AddRangeAsync(IEnumerable<Produto?> produtos)
         {
             try
             {
