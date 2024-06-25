@@ -1,0 +1,47 @@
+# run from src folder
+# docker-compose -f ../docker/docker-compose.yml up -d --build
+# docker-compose -f ../docker/docker-compose.yml down --remove-orphans
+
+services:
+  finserv.api:
+    hostname: finserv-api
+    container_name: finserv-api
+    networks:
+      - finserv-net
+    restart: always
+    depends_on:
+      - azuresqledge
+    build:
+      context: ../src
+      dockerfile: ../src/FinServ.Api/Dockerfile
+    ports:
+      - 9042:80
+      - 9043:443
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 0.5GB
+        reservations:
+          cpus: "0.25"
+          memory: 500M
+
+  azuresqledge:
+    image: mcr.microsoft.com/azure-sql-edge:2.0.0
+    hostname: azuresqledge
+    container_name: finserv-bd
+    restart: always
+    cap_add:
+      - SYS_PTRACE
+    networks:
+      - finserv-net
+    environment:
+      ACCEPT_EULA: 1
+      MSSQL_SA_PASSWORD: Abcd1234%
+      MSSQL_PID: Developer
+    ports:
+      - 1433:1433
+
+networks:
+  finserv-net:
+    driver: bridge
