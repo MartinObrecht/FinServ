@@ -43,9 +43,14 @@ dotnet run --project src/FinServ.Api/FinServ.Api.csproj ConnectionStrings:Defaul
 ```
 
 Para executar o projeto local, utilizando docker
-   
+
+Banco de dados
 ```
-docker container run --rm -p 8088:80 -e ConnectionStrings__DefaultConnection="ccc" martinobrecht/fin-serv-api:latest
+docker run --cap-add SYS_PTRACE -e 'ACCEPT_EULA=1' -e 'MSSQL_SA_PASSWORD=Abcd1234%' -e 'MSSQL_PID=Developer' -p 1433:1433 --name azuresqledge -d mcr.microsoft.com/azure-sql-edge:latest
+```
+Aplicação   
+```
+docker run --rm -p 8088:80 -e ConnectionStrings__DefaultConnection="docker container run --rm -p 3030:80 -e ConnectionStrings__DefaultConnection="Data Source=127.0.0.1,1433;Initial Catalog=FinServ;User Id=sa;Password=Abcd1234%;Integrated Security=False;MultipleActiveResultSets=True;TrustServerCertificate=true;" martinobrecht/fin-serv-api:latest" martinobrecht/fin-serv-api:latest
 ```
 
 Para acessar a documentação da API:
