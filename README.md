@@ -36,16 +36,16 @@ De que coisas você precisa para instalar o software e como instalá-lo?
 
 Para executar o projeto localmente, execute os comandos a partir da raiz do projeto (pasta que contem o arquivo sln)
 
-Para aplicar as migrations e criar as tabelas no banco de dados:
-
-```
-dotnet ef database update --project ./src/FinServ.Infra/FinServ.Infra.csproj --startup-project ./src/FinServ.Api/FinServ.Api.csproj
-```
-
 Para executar o projeto local:
 
 ```
-dotnet run --project ./src/FinServ.Api/FinServ.Api.csproj
+dotnet run --project src/FinServ.Api/FinServ.Api.csproj ConnectionStrings:DefaultConnection="ccc"
+```
+
+Para executar o projeto local, utilizando docker
+   
+```
+docker container run --rm -p 8088:80 -e ConnectionStrings__DefaultConnection="ccc" martinobrecht/fin-serv-api:latest
 ```
 
 Para acessar a documentação da API:
@@ -69,6 +69,26 @@ Os endpoints da API estão hospedados no Azure, e podem ser acessados através d
 
 ```
 https://finservapi.azurewebsites.net/swagger/index.html
+```
+
+# EntityFramework Commands
+
+```
+dotnet tool install --global dotnet-ef
+```
+
+```
+dotnet ef migrations add InitialMigration -s FinServ.Api -p FinServ.Infra -c FinServ.Infra.Database.Context.FinServContext -v
+```
+
+```
+dotnet ef database update InitialMigration --startup-project FinServ.Api --project FinServ.Infra --context FinServ.Infra.Database.Context.FinServContext --verbose
+```
+
+Connection String
+
+```
+Data Source=127.0.0.1,1433;Initial Catalog=FinServ;User Id=sa;Password=Abcd1234%;Integrated Security=False;MultipleActiveResultSets=True;TrustServerCertificate=true;
 ```
 
 
