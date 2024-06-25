@@ -15,13 +15,14 @@ namespace FinServ.Api.Controllers
     {
         private readonly IMediator _mediator;
         private readonly ILogger<ProdutosController> _logger;
-        private readonly IValidator<CreateProdutosRequest> _cadastrarProdutosFinanceirosValidator;
+        private readonly IValidator<CreateProdutosRequest> _createProdutoRequesrValidator;
+
 
         public ProdutosController(IMediator mediator, ILogger<ProdutosController> logger, IValidator<CreateProdutosRequest> cadastrarProdutosFinanceirosValidator)
         {
             _mediator = mediator;
             _logger = logger;
-            _cadastrarProdutosFinanceirosValidator = cadastrarProdutosFinanceirosValidator;
+            _createProdutoRequesrValidator = cadastrarProdutosFinanceirosValidator;
         }
 
         [HttpPost("Registrar")]
@@ -29,7 +30,7 @@ namespace FinServ.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AddAsync([FromBody] CreateProdutosRequest request)
         {
-            var validationResult = _cadastrarProdutosFinanceirosValidator.ValidateAsync(request);
+            var validationResult = _createProdutoRequesrValidator.ValidateAsync(request);
 
             if (!validationResult.IsCompletedSuccessfully)
             {

@@ -12,17 +12,15 @@ namespace FinServ.Application.Handlers.Clientes.CreateCliente
         private readonly IClienteRepository _clienteRepository;
         private readonly ILogger<CreateClienteHandler> _logger;
 
-        public CreateClienteHandler(IClienteRepository investidorRepository, ILogger<CreateClienteHandler> logger)
+        public CreateClienteHandler(IClienteRepository clienteRepository, ILogger<CreateClienteHandler> logger)
         {
-            _clienteRepository = investidorRepository;
+            _clienteRepository = clienteRepository;
             _logger = logger;
         }
 
         public async Task<CreateClienteResponse> Handle(CreateClienteRequest request, CancellationToken cancellationToken)
         {
-            bool cpfValido = CpfHelper.CpfValido(request.Cpf);
-
-            if (!cpfValido)
+            if (!CpfHelper.CpfValido(request.Cpf))
             {
                 _logger.LogWarning("Tentativa de cadastro com CPF inválido: Nome {Nome}, CPF {Cpf}", request.Nome, request.Cpf);
                 return new CreateClienteResponse
@@ -34,36 +32,32 @@ namespace FinServ.Application.Handlers.Clientes.CreateCliente
                 };
             }
 
-            try
+            var clienteExistente = await _clienteRepository.GetByCpfAsync(CpfHelper.ExtrairNumerosCpf(request.Cpf));
+            if (clienteExistente != null)
             {
-                var investidorExistente = await _clienteRepository.GetByCpfAsync(CpfHelper.ExtrairNumerosCpf(request.Cpf));
-
-                if (investidorExistente != null)
-                {
-                    _logger.LogWarning("Tentativa de cadastro de cliente já existente: Nome {Nome}, CPF {Cpf}", request.Nome, request.Cpf);
-                    return new CreateClienteResponse
-                    {
-                        Nome = request.Nome,
-                        Cpf = request.Cpf,
-                        Mensagem = "cliente já cadastrado.",
-                        CodigoRetorno = StatusCodes.Status409Conflict
-                    };
-                }
-
-                Cliente cliente = new Cliente(request.Nome, CpfHelper.ExtrairNumerosCpf(request.Cpf));
-
-
-                await _clienteRepository.AddAsync(cliente);
-
-                _logger.LogInformation("cliente cadastrado com sucesso: Nome {Nome}, CPF {Cpf}", request.Nome, request.Cpf);
+                _logger.LogWarning("Tentativa de cadastro de cliente já existente: Nome {Nome}, CPF {Cpf}", request.Nome, request.Cpf);
                 return new CreateClienteResponse
                 {
                     Nome = request.Nome,
                     Cpf = request.Cpf,
-                    Mensagem = "cliente cadastrado com sucesso.",
+                    Mensagem = "Cliente já cadastrado.",
+                    CodigoRetorno = StatusCodes.Status409Conflict
+                };
+            }
+
+            try
+            {
+                Cliente cliente = new Cliente(request.Nome, CpfHelper.ExtrairNumerosCpf(request.Cpf));
+                await _clienteRepository.AddAsync(cliente);
+
+                _logger.LogInformation("Cliente cadastrado com sucesso: Nome {Nome}, CPF {Cpf}", request.Nome, request.Cpf);
+                return new CreateClienteResponse
+                {
+                    Nome = request.Nome,
+                    Cpf = request.Cpf,
+                    Mensagem = "Cliente cadastrado com sucesso.",
                     CodigoRetorno = StatusCodes.Status201Created
                 };
-
             }
             catch (Exception ex)
             {
@@ -72,7 +66,7 @@ namespace FinServ.Application.Handlers.Clientes.CreateCliente
                 {
                     Nome = request.Nome,
                     Cpf = request.Cpf,
-                    Mensagem = "Erro ao processar o cadastro do cliente.",
+                    Mensagem = "Erro ao processar o cadastro do cliente. Por favor, tente novamente mais tarde.",
                     CodigoRetorno = StatusCodes.Status500InternalServerError
                 };
             }

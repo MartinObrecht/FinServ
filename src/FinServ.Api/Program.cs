@@ -28,7 +28,7 @@ namespace FinServ.Api
 
 
             builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
-            builder.Services.AddValidatorsFromAssemblyContaining<CreateClienteRequestValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<CreateClienteRequestValidator>();   
 
             ValidatorOptions.Global.LanguageManager.Enabled = true;
             ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("pt-BR");           

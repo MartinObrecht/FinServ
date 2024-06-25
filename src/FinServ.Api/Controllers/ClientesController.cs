@@ -14,13 +14,15 @@ namespace FinServ.Api.Controllers
     {
         private readonly IMediator _mediator;
         private readonly ILogger<ClientesController> _logger;
-        private readonly IValidator<CreateClienteRequest> _cadastrarClienteValidator;
+        private readonly IValidator<CreateClienteRequest> _createClienteValidator;
+        private readonly IValidator<BuyAtivoRequest> _buyAtivoRequestValidator;
 
-        public ClientesController(IMediator mediator, ILogger<ClientesController> logger, IValidator<CreateClienteRequest> cadastrarClienteValidator)
+        public ClientesController(IMediator mediator, ILogger<ClientesController> logger, IValidator<CreateClienteRequest> cadastrarClienteValidator, IValidator<BuyAtivoRequest> buyAtivoRequestValidator)
         {
             _mediator = mediator;
             _logger = logger;
-            _cadastrarClienteValidator = cadastrarClienteValidator;
+            _createClienteValidator = cadastrarClienteValidator;
+            _buyAtivoRequestValidator = buyAtivoRequestValidator;
         }
 
         [HttpPost("Registrar")]
@@ -28,7 +30,7 @@ namespace FinServ.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> CreateAsync([FromBody] CreateClienteRequest request)
         {
-            var validationResult = _cadastrarClienteValidator.ValidateAsync(request);
+            var validationResult = _createClienteValidator.ValidateAsync(request);
 
             if (!validationResult.IsCompletedSuccessfully)
             {
@@ -55,6 +57,12 @@ namespace FinServ.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> BuyAtivoAsync([FromBody] BuyAtivoRequest request)
         {
+            var validationResult = _buyAtivoRequestValidator.ValidateAsync(request);
+            if (!validationResult.IsCompletedSuccessfully)
+            {
+                return BadRequest(validationResult.Result);
+            }
+
             var response = await _mediator.Send(request);
 
             switch (response.CodigoRetorno)

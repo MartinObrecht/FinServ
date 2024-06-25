@@ -20,6 +20,7 @@ namespace FinServ.Api.Controllers
         [HttpGet("Obter")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Produces("application/json")]
         public async Task<ActionResult<GetAtivoByIdResponse>> GetByIdAsync([FromQuery]GetAtivoByIdRequest request)
         {
             var response = await _mediator.Send(request);
