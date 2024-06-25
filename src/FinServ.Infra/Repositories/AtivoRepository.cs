@@ -94,18 +94,17 @@ namespace FinServ.Infra.Repositories
             }
         }
 
-        public async Task<Ativo> GetByIdAsync(int id)
+        public async Task<Ativo?> GetByIdAsync(int id)
         {
             try
             {
-                return await _context.Ativos.FindAsync(id);
+                return await _context.Ativos.AsNoTracking().FirstOrDefaultAsync(a => a.Id == id);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao buscar ativo por id: {Id}", id);
                 throw new InvalidOperationException("Erro ao buscar ativo por id.", ex);
-            }
-            
+            }            
         }
 
         public async Task<IEnumerable<Ativo>> GetProdutosExpiry(DateTime dataVencimentoProduto)
