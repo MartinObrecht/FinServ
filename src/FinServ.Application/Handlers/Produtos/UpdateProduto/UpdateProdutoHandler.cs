@@ -45,7 +45,8 @@ namespace FinServ.Application.Handlers.Produtos.UpdateProduto
             var response = new UpdateProdutoResponse
             {
                 IdProduto = produto.Id,
-                Mensagem = "Produto atualizado com sucesso."
+                Mensagem = "Produto atualizado com sucesso.",
+                CodigoRetorno = StatusCodes.Status200OK
             };
 
             return response;

@@ -36,7 +36,9 @@ namespace FinServ.Application.Handlers.Ativos.GetAtivoById
                 DataCompra = ativo.DataCompra.ToShortDateString(),
                 Quantidade = ativo.Quantidade,
                 IdCliente = ativo.ClienteId,
-                IdProduto = ativo.ProdutoId
+                IdProduto = ativo.ProdutoId,
+                CodigoRetorno = StatusCodes.Status200OK,
+                Mensagem = "Ativo encontrado."
             };
         }
     }
