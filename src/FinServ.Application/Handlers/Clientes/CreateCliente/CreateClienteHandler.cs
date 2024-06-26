@@ -47,7 +47,7 @@ namespace FinServ.Application.Handlers.Clientes.CreateCliente
 
             try
             {
-                Cliente cliente = new Cliente(request.Nome, CpfHelper.ExtrairNumerosCpf(request.Cpf));
+                Cliente cliente = new Cliente(request.Nome, CpfHelper.ExtrairNumerosCpf(request.Cpf), request.Saldo);
                 await _clienteRepository.AddAsync(cliente);
 
                 _logger.LogInformation("Cliente cadastrado com sucesso: Nome {Nome}, CPF {Cpf}", request.Nome, request.Cpf);

@@ -6,9 +6,9 @@ namespace FinServ.Domain.Interfaces.Entities
     {
         string Nome { get; set; }
         string Descricao { get; set; }
-        double Valor { get; set; }
+        decimal Valor { get; set; }
         int CodigoProduto { get; set; }
-        double TaxaJurosMensal { get; set; }
+        decimal TaxaJurosMensal { get; set; }
         DateTime DataVencimento { get; set; }
         int Quantidade { get; set; }
         ICollection<Ativo> Ativos { get; set; }

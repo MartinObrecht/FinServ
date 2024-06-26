@@ -6,5 +6,6 @@ namespace FinServ.Application.Handlers.Clientes.CreateCliente
     {
         public string Nome { get; set; }
         public string Cpf { get; set; }
+        public decimal Saldo { get; set; }
     }
 }

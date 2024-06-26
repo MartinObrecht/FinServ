@@ -5,13 +5,13 @@ namespace FinServ.Domain.Interfaces.Entities
 {
     public interface IAtivo : IEntidadeBase
     {
-        double ValorCompra { get; set; }
+        decimal ValorCompra { get; set; }
         DateTime DataCompra { get; set; }
         int Quantidade { get; set; }
         int ClienteId { get; set; }
         Cliente Cliente { get; set; }
         int ProdutoId { get; set; }
         Produto Produto { get; set; }
-        double ValorAtual { get; set; }
+        decimal ValorAtual { get; set; }
     }
 }

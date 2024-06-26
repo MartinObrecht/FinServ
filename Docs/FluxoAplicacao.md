@@ -12,6 +12,7 @@ https://fin-serv-api.azurewebsites.net/api/Cliente/Registrar
 {
   "nome": "string",
   "cpf": "string"
+  "saldo": decimal"
 }
 ```
 

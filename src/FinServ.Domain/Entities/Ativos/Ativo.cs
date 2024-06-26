@@ -8,7 +8,7 @@ namespace FinServ.Domain.Entities.Ativos
     public class Ativo : IAtivo
     {
         public int Id { get; set; }
-        public double ValorCompra { get; set; }
+        public decimal ValorCompra { get; set; }
         public DateTime DataCompra { get; set; }
         public int Quantidade { get; set; }
         public int ClienteId { get; set; }
@@ -16,6 +16,6 @@ namespace FinServ.Domain.Entities.Ativos
         public int ProdutoId { get; set; }
         public Produto Produto { get; set; }
         [NotMapped]
-        public double ValorAtual { get; set; }
+        public decimal ValorAtual { get; set; }
     }
 }

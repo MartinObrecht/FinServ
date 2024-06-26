@@ -6,9 +6,9 @@ namespace FinServ.Application.Handlers.Produtos.UpdateProduto
     {
         public int IdProduto { get; set; }
         public string Nome { get; set; }
-        public double Valor { get; set; }
+        public decimal Valor { get; set; }
         public int CodigoProduto { get; set; }
-        public double TaxaJurosMensal { get; set; }
+        public decimal TaxaJurosMensal { get; set; }
         public string DataVencimento { get; set; }
         public string Descricao { get; set; }
         public int Quantidade { get; set; }

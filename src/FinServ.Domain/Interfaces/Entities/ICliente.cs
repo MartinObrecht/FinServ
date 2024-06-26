@@ -4,8 +4,9 @@ namespace FinServ.Domain.Interfaces.Entities
 {
     public interface ICliente : IEntidadeBase
     {
-        public string Nome { get; set; }
-        public string Cpf { get; set; }
+        string Nome { get; set; }
+        string Cpf { get; set; }
+        decimal Saldo { get; set; }
         ICollection<Ativo> Ativos { get; set; }
     }
 }

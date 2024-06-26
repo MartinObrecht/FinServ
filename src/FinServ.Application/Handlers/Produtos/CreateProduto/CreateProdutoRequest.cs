@@ -5,8 +5,8 @@ namespace FinServ.Application.Handlers.Produtos.CreateProduto
     public class CreateProdutoRequest : IRequest<CreateProdutoResponse>
     {
         public string Nome { get; set; }
-        public double Valor { get; set; }
-        public double TaxaJurosMensal { get; set; }
+        public decimal Valor { get; set; }
+        public decimal TaxaJurosMensal { get; set; }
         public DateTime DataVencimento { get; set; }
         public int Quantidade { get; set; }
         public int CodigoProduto { get; set; }
