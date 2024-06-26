@@ -27,8 +27,8 @@ namespace FinServ.Tests.FinServ.Application.Handlers.Produtos
             // Arrange
             var produtos = new List<Produto>
             {
-                new Produto { Id = 1, Nome = "Produto 1", TaxaJurosMensal = 0.05, DataVencimento = System.DateTime.Now.AddYears(1), Quantidade = 100, CodigoProduto = 1234, Descricao = "Descricao Produto 1" },
-                new Produto { Id = 2, Nome = "Produto 2", TaxaJurosMensal = 0.03, DataVencimento = System.DateTime.Now.AddYears(2), Quantidade = 200, CodigoProduto = 123, Descricao = "Descricao Produto 2" }
+                new Produto { Id = 1, Nome = "Produto 1", TaxaJurosMensal = 0.05m, DataVencimento = System.DateTime.Now.AddYears(1), Quantidade = 100, CodigoProduto = 1234, Descricao = "Descricao Produto 1" },
+                new Produto { Id = 2, Nome = "Produto 2", TaxaJurosMensal = 0.03m, DataVencimento = System.DateTime.Now.AddYears(2), Quantidade = 200, CodigoProduto = 123, Descricao = "Descricao Produto 2" }
             };
 
             _produtoRepositoryMock.Setup(repo => repo.GetAvailableAsync())

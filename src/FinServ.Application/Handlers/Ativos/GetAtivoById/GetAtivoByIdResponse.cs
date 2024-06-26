@@ -5,7 +5,7 @@ namespace FinServ.Application.Handlers.Ativos.GetAtivoById
     public class GetAtivoByIdResponse : BaseResult
     {
         public int IdAtivo { get; set; }
-        public double ValorCompra { get; set; }
+        public decimal ValorCompra { get; set; }
         public string DataCompra { get; set; }
         public int Quantidade { get; set; }
         public int IdCliente { get; set; }

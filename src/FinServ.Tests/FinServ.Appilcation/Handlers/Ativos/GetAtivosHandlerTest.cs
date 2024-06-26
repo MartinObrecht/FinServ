@@ -52,7 +52,7 @@ namespace FinServ.Tests.FinServ.Application.Handlers.Clientes
                     NomeProduto = "Produto 1",
                     DescricaoProduto = "Descrição do Produto 1",
                     DataVencimentoProduto = DateTime.Now.AddDays(30).ToShortDateString(),
-                    TaxaJurosMes = 0.01,
+                    TaxaJurosMes = 0.01m,
                     ValorCompra = 1000,
                     DataCompra = DateTime.Now.AddDays(-10).ToShortDateString(),
                     ValorAtual = 1050,

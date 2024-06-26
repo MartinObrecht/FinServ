@@ -54,7 +54,7 @@ namespace FinServ.Tests.FinServ.Application.Handlers.Produtos
             {
                 IdProduto = 1,
                 Nome = "Produto Atualizado",
-                TaxaJurosMensal = 0.05,
+                TaxaJurosMensal = 0.05m,
                 DataVencimento = DateTime.Now.AddYears(1).ToString(),
                 Quantidade = 100,
                 CodigoProduto = 1234,

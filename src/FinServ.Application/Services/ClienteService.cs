@@ -1,6 +1,7 @@
 ﻿using FinServ.Application.Models.Results;
 using FinServ.Application.Services.Interfaces;
 using FinServ.Domain.Entities.Ativos;
+using FinServ.Domain.Entities.Clientes;
 using FinServ.Domain.Repositories;
 using Microsoft.AspNetCore.Http;
 
@@ -21,7 +22,7 @@ namespace FinServ.Application.Services
 
         public async Task<BaseResult> ComprarAtivoAsync(int idCliente, int codigoProduto, int quantidade)
         {      
-            var cliente = await _clienteRepository.GetByIdAsync(idCliente);
+            Cliente? cliente = await _clienteRepository.GetByIdAsync(idCliente);
 
             if (cliente == null)
             {
@@ -64,6 +65,8 @@ namespace FinServ.Application.Services
             await _ativoRepository.AddAsync(ativo);
 
             produto.Quantidade -= quantidade;
+            cliente.Saldo -= produto.Valor * quantidade;
+            _clienteRepository.Update(cliente);
             _produtoRepository.Update(produto);
 
             return new BaseResult 
