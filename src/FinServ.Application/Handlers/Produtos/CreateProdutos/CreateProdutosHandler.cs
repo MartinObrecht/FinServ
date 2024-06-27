@@ -36,6 +36,7 @@ namespace FinServ.Application.Handlers.Produtos.CreateProdutos
             }
 
             await _unitOfWork.Produtos.AddRangeAsync(produtos);
+            _unitOfWork.Commit();
 
             return new CreateProdutosResponse
             {
