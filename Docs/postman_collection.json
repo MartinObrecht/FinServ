@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "039e1b35-e1bf-4e60-92f1-abe63485c03e",
+		"_postman_id": "55e1c656-f26c-4b99-a844-9f040feb0fb4",
 		"name": "FinServ.Api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "14949270"
@@ -22,7 +22,7 @@
 										"header": [
 											{
 												"key": "Accept",
-												"value": "text/plain"
+												"value": "application/json"
 											}
 										],
 										"url": {
@@ -51,13 +51,15 @@
 												"header": [
 													{
 														"key": "Accept",
-														"value": "text/plain"
+														"value": "application/json"
 													}
 												],
 												"url": {
-													"raw": "//api/Ativos/Obter?IdAtivo=<integer>",
+													"raw": "{{baseUrl}}/api/Ativos/Obter?IdAtivo=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
 													"path": [
-														"",
 														"api",
 														"Ativos",
 														"Obter"
@@ -136,7 +138,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"nome\": \"<string>\",\n  \"cpf\": \"<string>\"\n}",
+											"raw": "{\n  \"nome\": \"<string>\",\n  \"cpf\": \"<string>\",\n  \"saldo\": \"<double>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -169,7 +171,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"nome\": \"<string>\",\n  \"cpf\": \"<string>\"\n}",
+													"raw": "{\n  \"nome\": \"<string>\",\n  \"cpf\": \"<string>\",\n  \"saldo\": \"<double>\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -178,9 +180,11 @@
 													}
 												},
 												"url": {
-													"raw": "//api/Clientes/Registrar",
+													"raw": "{{baseUrl}}/api/Clientes/Registrar",
+													"host": [
+														"{{baseUrl}}"
+													],
 													"path": [
-														"",
 														"api",
 														"Clientes",
 														"Registrar"
@@ -206,7 +210,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"nome\": \"<string>\",\n  \"cpf\": \"<string>\"\n}",
+													"raw": "{\n  \"nome\": \"<string>\",\n  \"cpf\": \"<string>\",\n  \"saldo\": \"<double>\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -252,7 +256,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"idCliente\": \"<integer>\",\n  \"codigoProduto\": \"<integer>\",\n  \"quantidade\": \"<integer>\"\n}",
+											"raw": "{\n  \"cpf\": \"<string>\",\n  \"idProduto\": \"<integer>\",\n  \"quantidade\": \"<integer>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -285,7 +289,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"idCliente\": \"<integer>\",\n  \"codigoProduto\": \"<integer>\",\n  \"quantidade\": \"<integer>\"\n}",
+													"raw": "{\n  \"cpf\": \"<string>\",\n  \"idProduto\": \"<integer>\",\n  \"quantidade\": \"<integer>\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -294,9 +298,11 @@
 													}
 												},
 												"url": {
-													"raw": "//api/Clientes/ComprarAtivo",
+													"raw": "{{baseUrl}}/api/Clientes/ComprarAtivo",
+													"host": [
+														"{{baseUrl}}"
+													],
 													"path": [
-														"",
 														"api",
 														"Clientes",
 														"ComprarAtivo"
@@ -322,7 +328,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"idCliente\": \"<integer>\",\n  \"codigoProduto\": \"<integer>\",\n  \"quantidade\": \"<integer>\"\n}",
+													"raw": "{\n  \"cpf\": \"<string>\",\n  \"idProduto\": \"<integer>\",\n  \"quantidade\": \"<integer>\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -367,7 +373,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/api/Clientes/VenderAtivo?AtivoId=<integer>",
+											"raw": "{{baseUrl}}/api/Clientes/VenderAtivo?Cpf=<string>&AtivoId=<integer>",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -377,6 +383,10 @@
 												"VenderAtivo"
 											],
 											"query": [
+												{
+													"key": "Cpf",
+													"value": "<string>"
+												},
 												{
 													"key": "AtivoId",
 													"value": "<integer>"
@@ -391,14 +401,20 @@
 												"method": "DELETE",
 												"header": [],
 												"url": {
-													"raw": "//api/Clientes/VenderAtivo?AtivoId=<integer>",
+													"raw": "{{baseUrl}}/api/Clientes/VenderAtivo?Cpf=<string>&AtivoId=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
 													"path": [
-														"",
 														"api",
 														"Clientes",
 														"VenderAtivo"
 													],
 													"query": [
+														{
+															"key": "Cpf",
+															"value": "<string>"
+														},
 														{
 															"key": "AtivoId",
 															"value": "<integer>"
@@ -424,7 +440,7 @@
 													}
 												],
 												"url": {
-													"raw": "{{baseUrl}}/api/Clientes/VenderAtivo?AtivoId=<integer>",
+													"raw": "{{baseUrl}}/api/Clientes/VenderAtivo?Cpf=<string>&AtivoId=<integer>",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -434,6 +450,10 @@
 														"VenderAtivo"
 													],
 													"query": [
+														{
+															"key": "Cpf",
+															"value": "<string>"
+														},
 														{
 															"key": "AtivoId",
 															"value": "<integer>"
@@ -459,7 +479,7 @@
 												"method": "DELETE",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/api/Clientes/VenderAtivo?AtivoId=<integer>",
+													"raw": "{{baseUrl}}/api/Clientes/VenderAtivo?Cpf=<string>&AtivoId=<integer>",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -469,6 +489,10 @@
 														"VenderAtivo"
 													],
 													"query": [
+														{
+															"key": "Cpf",
+															"value": "<string>"
+														},
 														{
 															"key": "AtivoId",
 															"value": "<integer>"
@@ -501,7 +525,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/api/Clientes/ExtratoAtivos?ClienteId=<integer>",
+											"raw": "{{baseUrl}}/api/Clientes/ExtratoAtivos?Cpf=<string>",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -512,8 +536,8 @@
 											],
 											"query": [
 												{
-													"key": "ClienteId",
-													"value": "<integer>"
+													"key": "Cpf",
+													"value": "<string>"
 												}
 											]
 										}
@@ -530,17 +554,19 @@
 													}
 												],
 												"url": {
-													"raw": "//api/Clientes/ExtratoAtivos?ClienteId=<integer>",
+													"raw": "{{baseUrl}}/api/Clientes/ExtratoAtivos?Cpf=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
 													"path": [
-														"",
 														"api",
 														"Clientes",
 														"ExtratoAtivos"
 													],
 													"query": [
 														{
-															"key": "ClienteId",
-															"value": "<integer>"
+															"key": "Cpf",
+															"value": "<string>"
 														}
 													]
 												}
@@ -555,7 +581,7 @@
 												}
 											],
 											"cookie": [],
-											"body": "[\n  {\n    \"nomeProduto\": \"<string>\",\n    \"descricaoProduto\": \"<string>\",\n    \"dataVencimentoProduto\": \"<string>\",\n    \"taxaJurosMes\": \"<double>\",\n    \"valorCompra\": \"<double>\",\n    \"valorAtual\": \"<double>\",\n    \"quantidade\": \"<integer>\",\n    \"dataCompra\": \"<string>\"\n  },\n  {\n    \"nomeProduto\": \"<string>\",\n    \"descricaoProduto\": \"<string>\",\n    \"dataVencimentoProduto\": \"<string>\",\n    \"taxaJurosMes\": \"<double>\",\n    \"valorCompra\": \"<double>\",\n    \"valorAtual\": \"<double>\",\n    \"quantidade\": \"<integer>\",\n    \"dataCompra\": \"<string>\"\n  }\n]"
+											"body": "{\n  \"mensagem\": \"<string>\",\n  \"nome\": \"<string>\",\n  \"saldo\": \"<double>\",\n  \"patrimonio\": \"<double>\",\n  \"ativos\": [\n    {\n      \"idAtivo\": \"<integer>\",\n      \"nomeProduto\": \"<string>\",\n      \"descricaoProduto\": \"<string>\",\n      \"dataVencimentoProduto\": \"<string>\",\n      \"taxaJurosMes\": \"<double>\",\n      \"valorCompra\": \"<double>\",\n      \"valorAtual\": \"<double>\",\n      \"quantidade\": \"<integer>\",\n      \"dataCompra\": \"<string>\"\n    },\n    {\n      \"idAtivo\": \"<integer>\",\n      \"nomeProduto\": \"<string>\",\n      \"descricaoProduto\": \"<string>\",\n      \"dataVencimentoProduto\": \"<string>\",\n      \"taxaJurosMes\": \"<double>\",\n      \"valorCompra\": \"<double>\",\n      \"valorAtual\": \"<double>\",\n      \"quantidade\": \"<integer>\",\n      \"dataCompra\": \"<string>\"\n    }\n  ]\n}"
 										},
 										{
 											"name": "Server Error",
@@ -563,7 +589,7 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/api/Clientes/ExtratoAtivos?ClienteId=<integer>",
+													"raw": "{{baseUrl}}/api/Clientes/ExtratoAtivos?Cpf=<string>",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -574,8 +600,8 @@
 													],
 													"query": [
 														{
-															"key": "ClienteId",
-															"value": "<integer>"
+															"key": "Cpf",
+															"value": "<string>"
 														}
 													]
 												}
@@ -597,10 +623,10 @@
 					"name": "Notifications",
 					"item": [
 						{
-							"name": "ProdutosExpiracaoHoje",
+							"name": "ProdutosAVencer",
 							"item": [
 								{
-									"name": "/api/Notifications/ProdutosExpiracaoHoje",
+									"name": "/api/Notifications/ProdutosAVencer",
 									"request": {
 										"method": "POST",
 										"header": [
@@ -620,14 +646,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseUrl}}/api/Notifications/ProdutosExpiracaoHoje",
+											"raw": "{{baseUrl}}/api/Notifications/ProdutosAVencer",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
 												"api",
 												"Notifications",
-												"ProdutosExpiracaoHoje"
+												"ProdutosAVencer"
 											]
 										}
 									},
@@ -653,12 +679,14 @@
 													}
 												},
 												"url": {
-													"raw": "//api/Notifications/ProdutosExpiracaoHoje",
+													"raw": "{{baseUrl}}/api/Notifications/ProdutosAVencer",
+													"host": [
+														"{{baseUrl}}"
+													],
 													"path": [
-														"",
 														"api",
 														"Notifications",
-														"ProdutosExpiracaoHoje"
+														"ProdutosAVencer"
 													]
 												}
 											},
@@ -735,9 +763,11 @@
 													}
 												},
 												"url": {
-													"raw": "//api/Produtos/Registrar",
+													"raw": "{{baseUrl}}/api/Produtos/Registrar",
+													"host": [
+														"{{baseUrl}}"
+													],
 													"path": [
-														"",
 														"api",
 														"Produtos",
 														"Registrar"
@@ -832,9 +862,11 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "//api/Produtos/Obter?CodigoProduto=<integer>",
+													"raw": "{{baseUrl}}/api/Produtos/Obter?CodigoProduto=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
 													"path": [
-														"",
 														"api",
 														"Produtos",
 														"Obter"
@@ -960,9 +992,11 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "//api/Produtos/Disponiveis",
+													"raw": "{{baseUrl}}/api/Produtos/Disponiveis",
+													"host": [
+														"{{baseUrl}}"
+													],
 													"path": [
-														"",
 														"api",
 														"Produtos",
 														"Disponiveis"
@@ -1099,9 +1133,11 @@
 													}
 												},
 												"url": {
-													"raw": "//api/Produtos/Atualizar",
+													"raw": "{{baseUrl}}/api/Produtos/Atualizar",
+													"host": [
+														"{{baseUrl}}"
+													],
 													"path": [
-														"",
 														"api",
 														"Produtos",
 														"Atualizar"
@@ -1244,9 +1280,11 @@
 												"method": "DELETE",
 												"header": [],
 												"url": {
-													"raw": "//api/Produtos/Remover?IdProduto=<integer>",
+													"raw": "{{baseUrl}}/api/Produtos/Remover?IdProduto=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
 													"path": [
-														"",
 														"api",
 														"Produtos",
 														"Remover"
@@ -1345,32 +1383,10 @@
 			]
 		}
 	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"packages": {},
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"packages": {},
-				"exec": [
-					""
-				]
-			}
-		}
-	],
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "https://fin-serv-api.azurewebsites.net/"
+			"value": "/"
 		}
 	]
 }
