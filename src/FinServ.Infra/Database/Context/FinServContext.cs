@@ -19,7 +19,7 @@ namespace FinServ.Infra.Database.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Cliente>().ToTable("Clientes");
+            modelBuilder.Entity<Cliente>().ToTable("Clientes").HasAlternateKey(a => a.Cpf);
             modelBuilder.Entity<Produto>().ToTable("Produtos").HasIndex(i => i.CodigoProduto).IsUnique();
             modelBuilder.Entity<Ativo>().ToTable("Ativos");
 

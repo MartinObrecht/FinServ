@@ -9,12 +9,12 @@ namespace FinServ.Application.Handlers.Clientes.CreateCliente
 {
     public class CreateClienteHandler : IRequestHandler<CreateClienteRequest, CreateClienteResponse>
     {
-        private readonly IClienteRepository _clienteRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<CreateClienteHandler> _logger;
 
-        public CreateClienteHandler(IClienteRepository clienteRepository, ILogger<CreateClienteHandler> logger)
+        public CreateClienteHandler(IUnitOfWork unitOfWork, ILogger<CreateClienteHandler> logger)
         {
-            _clienteRepository = clienteRepository;
+            _unitOfWork = unitOfWork;
             _logger = logger;
         }
 
@@ -32,7 +32,7 @@ namespace FinServ.Application.Handlers.Clientes.CreateCliente
                 };
             }
 
-            var clienteExistente = await _clienteRepository.GetByCpfAsync(CpfHelper.ExtrairNumerosCpf(request.Cpf));
+            var clienteExistente = await _unitOfWork.Clientes.GetByCpfAsync(CpfHelper.ExtrairNumerosCpf(request.Cpf));
             if (clienteExistente != null)
             {
                 _logger.LogWarning("Tentativa de cadastro de cliente já existente: Nome {Nome}, CPF {Cpf}", request.Nome, request.Cpf);
@@ -48,13 +48,15 @@ namespace FinServ.Application.Handlers.Clientes.CreateCliente
             try
             {
                 Cliente cliente = new Cliente(request.Nome, CpfHelper.ExtrairNumerosCpf(request.Cpf), request.Saldo);
-                await _clienteRepository.AddAsync(cliente);
+                await _unitOfWork.Clientes.AddAsync(cliente);
+                _unitOfWork.Commit();
 
                 _logger.LogInformation("Cliente cadastrado com sucesso: Nome {Nome}, CPF {Cpf}", request.Nome, request.Cpf);
                 return new CreateClienteResponse
                 {
                     Nome = request.Nome,
                     Cpf = request.Cpf,
+                    Saldo = request.Saldo,
                     Mensagem = "Cliente cadastrado com sucesso.",
                     CodigoRetorno = StatusCodes.Status201Created
                 };

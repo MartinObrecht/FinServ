@@ -7,18 +7,17 @@ namespace FinServ.Application.Handlers.Ativos.GetAtivoById
 {
     public class GetAtivoByIdHandler : IRequestHandler<GetAtivoByIdRequest, GetAtivoByIdResponse>
     {
-        private readonly IAtivoRepository _ativoRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<GetAtivoByIdHandler> _logger;
-
-        public GetAtivoByIdHandler(IAtivoRepository ativoRepository, ILogger<GetAtivoByIdHandler> logger)
+        public GetAtivoByIdHandler(IUnitOfWork unitOfWork, ILogger<GetAtivoByIdHandler> logger)
         {
-            _ativoRepository = ativoRepository;
+            _unitOfWork = unitOfWork;
             _logger = logger;
         }
 
         public async Task<GetAtivoByIdResponse> Handle(GetAtivoByIdRequest request, CancellationToken cancellationToken)
         {
-            var ativo = await _ativoRepository.GetByIdAsync(request.IdAtivo);
+            var ativo = await _unitOfWork.Ativos.GetByIdAsync(request.IdAtivo);
             
             if (ativo == null)
             {

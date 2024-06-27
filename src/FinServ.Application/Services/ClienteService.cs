@@ -2,6 +2,7 @@
 using FinServ.Application.Services.Interfaces;
 using FinServ.Domain.Entities.Ativos;
 using FinServ.Domain.Entities.Clientes;
+using FinServ.Domain.Entities.Helpers;
 using FinServ.Domain.Repositories;
 using Microsoft.AspNetCore.Http;
 
@@ -9,20 +10,16 @@ namespace FinServ.Application.Services
 {
     public class ClienteService : IClienteService
     {
-        private readonly IClienteRepository _clienteRepository;
-        private readonly IProdutoRepository _produtoRepository;
-        private readonly IAtivoRepository _ativoRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ClienteService(IClienteRepository clienteRepository, IProdutoRepository produtoRepository, IAtivoRepository ativoRepository)
+        public ClienteService(IUnitOfWork unitOfWork)
         {
-            _clienteRepository = clienteRepository;
-            _produtoRepository = produtoRepository;
-            _ativoRepository = ativoRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<BaseResult> ComprarAtivoAsync(int idCliente, int codigoProduto, int quantidade)
+        public async Task<BaseResult> ComprarAtivoAsync(string cpf, int idProduto, int quantidade)
         {      
-            Cliente? cliente = await _clienteRepository.GetByIdAsync(idCliente);
+            Cliente? cliente = await _unitOfWork.Clientes.GetByCpfAsync(CpfHelper.ExtrairNumerosCpf(cpf));
 
             if (cliente == null)
             {
@@ -33,7 +30,7 @@ namespace FinServ.Application.Services
                 };
             }
 
-            var produto = await _produtoRepository.GetByCodigoAsync(codigoProduto);
+            var produto = await _unitOfWork.Produtos.GetByIdAsync(idProduto);
 
             if (produto == null)
             {
@@ -53,21 +50,32 @@ namespace FinServ.Application.Services
                 };
             }
 
+            if (cliente.Saldo - produto.Valor * quantidade < 0)
+            {
+                return new BaseResult
+                {
+                    CodigoRetorno = StatusCodes.Status400BadRequest,
+                    Mensagem = "Saldo insuficiente."
+                };
+            }
+
             var ativo = new Ativo
             {
-                ClienteId = idCliente,
+                ClienteId = cliente.Id,
                 ProdutoId = produto.Id,
                 ValorCompra = produto.Valor,
                 Quantidade = quantidade,
                 DataCompra = DateTime.Now
             };
 
-            await _ativoRepository.AddAsync(ativo);
+            await _unitOfWork.Ativos.AddAsync(ativo);
 
             produto.Quantidade -= quantidade;
             cliente.Saldo -= produto.Valor * quantidade;
-            _clienteRepository.Update(cliente);
-            _produtoRepository.Update(produto);
+            _unitOfWork.Clientes.Update(cliente);
+            _unitOfWork.Produtos.Update(produto);
+
+            _unitOfWork.Commit();
 
             return new BaseResult 
             { 
@@ -76,11 +84,13 @@ namespace FinServ.Application.Services
             };
         }
 
-        public async Task<BaseResult> VenderAtivoAsync(int IdAtivo)
+        public async Task<BaseResult> VenderAtivoAsync(int IdAtivo, string cpf)
         {
-            var ativo = await _ativoRepository.GetByIdAsync(IdAtivo);
+            var ativosCliente = await _unitOfWork.Ativos.GetAtivosByCpfAsync(CpfHelper.ExtrairNumerosCpf(cpf));
+            var ativo = ativosCliente.FirstOrDefault(a => a.Id == IdAtivo);
 
-            if (ativo == null)
+
+            if (ativosCliente == null)
             {
                 return new BaseResult
                 {
@@ -89,7 +99,7 @@ namespace FinServ.Application.Services
                 };
             }
 
-            var produto = await _produtoRepository.GetByIdAsync(ativo.ProdutoId);
+            var produto = await _unitOfWork.Produtos.GetByIdAsync(ativosCliente.Select(x => x.ProdutoId).FirstOrDefault());
             if (produto == null) {
                 return new BaseResult
                 {
@@ -99,9 +109,14 @@ namespace FinServ.Application.Services
             }
 
             produto.Quantidade += ativo.Quantidade;
+            var cliente = ativosCliente.Select(x => x.Cliente).FirstOrDefault();
+            cliente.Saldo += ativo.ValorCompra * ativo.Quantidade;           
 
-            _produtoRepository.Update(produto);
-            await _ativoRepository.DeleteAsync(ativo);
+            _unitOfWork.Produtos.Update(produto);
+            _unitOfWork.Clientes.Update(cliente);
+            _unitOfWork.Ativos.Delete(ativo);
+
+            _unitOfWork.Commit();
 
             return new BaseResult
             {

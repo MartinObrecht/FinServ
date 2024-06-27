@@ -2,6 +2,7 @@ using FinServ.Application.Handlers.Clientes.CreateCliente;
 using FinServ.Application.Services;
 using FinServ.Application.Services.Interfaces;
 using FinServ.Domain.Repositories;
+using FinServ.Infra;
 using FinServ.Infra.Database.Context;
 using FinServ.Infra.Repositories;
 using FluentValidation;
@@ -41,7 +42,7 @@ namespace FinServ.Api
             builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
             builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
             builder.Services.AddScoped<IAtivoRepository, AtivoRepository>();
-            builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             builder.Services.AddScoped<IClienteService, ClienteService>();
 

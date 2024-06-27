@@ -9,19 +9,19 @@ namespace FinServ.Application.Handlers.Produtos.UpdateProduto
     public class UpdateProdutoHandler : IRequestHandler<UpdateProdutoRequest, UpdateProdutoResponse>
     {
         private readonly IMediator _mediator;
-        private readonly IProdutoRepository _produtoRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<UpdateProdutoHandler> _logger;
 
-        public UpdateProdutoHandler(IMediator mediator, IProdutoRepository produtoRepository, ILogger<UpdateProdutoHandler> logger)
+        public UpdateProdutoHandler(IMediator mediator, IUnitOfWork unitOfWork, ILogger<UpdateProdutoHandler> logger)
         {
             _mediator = mediator;
-            _produtoRepository = produtoRepository;
+            _unitOfWork = unitOfWork;
             _logger = logger;
         }
 
         public async Task<UpdateProdutoResponse> Handle(UpdateProdutoRequest request, CancellationToken cancellationToken)
         {
-            Produto? produto = await _produtoRepository.GetByIdAsync(request.IdProduto);
+            Produto? produto = await _unitOfWork.Produtos.GetByIdAsync(request.IdProduto);
 
             if (produto == null)
             {
@@ -40,7 +40,8 @@ namespace FinServ.Application.Handlers.Produtos.UpdateProduto
             produto.Descricao = request.Descricao;
             produto.Valor = request.Valor;
 
-            _produtoRepository.Update(produto);
+            _unitOfWork.Produtos.Update(produto);
+            _unitOfWork.Commit();
 
             var response = new UpdateProdutoResponse
             {

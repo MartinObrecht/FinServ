@@ -9,12 +9,12 @@ namespace FinServ.Application.Handlers.Produtos.CreateProdutos
 {
     public class CreateProdutosHandler : IRequestHandler<CreateProdutosRequest, CreateProdutosResponse>
     {
-        private readonly IProdutoRepository _produtoRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<CreateProdutosHandler> _logger;
 
-        public CreateProdutosHandler(IProdutoRepository produtoRepository, ILogger<CreateProdutosHandler> logger)
+        public CreateProdutosHandler(IUnitOfWork unitOfWork, ILogger<CreateProdutosHandler> logger)
         {
-            _produtoRepository = produtoRepository;
+            _unitOfWork = unitOfWork;
             _logger = logger;
         }
 
@@ -35,7 +35,7 @@ namespace FinServ.Application.Handlers.Produtos.CreateProdutos
                 });
             }
 
-            await _produtoRepository.AddRangeAsync(produtos);
+            await _unitOfWork.Produtos.AddRangeAsync(produtos);
 
             return new CreateProdutosResponse
             {

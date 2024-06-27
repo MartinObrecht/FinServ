@@ -6,13 +6,15 @@ namespace FinServ.Application.Handlers.Clientes.BuyAtivo
     {
         public BuyAtivoRequestValidator()
         {
-            RuleFor(x => x.IdCliente)
+            RuleFor(x => x.Cpf)
                 .NotEmpty()
-                .WithMessage("IdCliente é obrigatório");
+                .WithMessage("CPF é obrigatório")
+                .Matches(@"^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$")
+                .WithMessage("CPF deve conter apenas números");
 
-            RuleFor(x => x.CodigoProduto)
+            RuleFor(x => x.IdProduto)
                 .NotEmpty()
-                .WithMessage("CodigoProduto é obrigatório");
+                .WithMessage("IProduto é obrigatório");
 
             RuleFor(x => x.Quantidade)
                 .NotEmpty()

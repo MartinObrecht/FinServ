@@ -102,16 +102,19 @@ namespace FinServ.Api.Controllers
         [HttpGet("ExtratoAtivos")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<GetAtivosResponse>>> GetByClienteAsync([FromQuery] GetAtivosRequest request)
+        public async Task<ActionResult<GetAtivosResponse>> GetByClienteAsync([FromQuery] GetAtivosRequest request)
         {
             var response = await _mediator.Send(request);
 
-            if (!response.Any())
+            switch (response.CodigoRetorno)
             {
-                return NotFound();
+                case StatusCodes.Status404NotFound:
+                    return NotFound(response);
+                case StatusCodes.Status500InternalServerError:
+                    return StatusCode(StatusCodes.Status500InternalServerError, response);
             }
-            return Ok(response);
 
+            return Ok(response);
         }
     }
 }

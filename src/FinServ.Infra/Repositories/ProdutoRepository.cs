@@ -6,31 +6,15 @@ using Microsoft.Extensions.Logging;
 
 namespace FinServ.Infra.Repositories
 {
-    public class ProdutoRepository : IProdutoRepository
+    public class ProdutoRepository : Repository<Produto>, IProdutoRepository
     {
         private readonly FinServContext _context;
         private readonly ILogger<IClienteRepository> _logger;
 
-        public ProdutoRepository(FinServContext context, ILogger<IClienteRepository> logger)
+        public ProdutoRepository(FinServContext context, ILogger<IClienteRepository> logger) : base(context)
         {
             _context = context;
             _logger = logger;
-        }
-
-        public async Task<Produto> AddAsync(Produto produto)
-        {
-            try
-            {
-                await _context.Produtos.AddAsync(produto);
-                await _context.SaveChangesAsync();
-
-                return await Task.FromResult(produto);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Erro ao cadastrar produto financeiro: {Produto}", produto);
-                throw new InvalidOperationException("Erro ao cadastrar produto financeiro.", ex);
-            }
         }
 
         public async Task AddRangeAsync(IEnumerable<Produto?> produtos)
@@ -38,7 +22,6 @@ namespace FinServ.Infra.Repositories
             try
             {
                 await _context.Produtos.AddRangeAsync(produtos);
-                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -62,36 +45,6 @@ namespace FinServ.Infra.Repositories
                 throw new InvalidOperationException($"Erro ao obter produtos financeiros pelo código do tipo financeiro: {codigoProduto}.", ex);
             }
         }
-
-
-        public async Task<Produto?> GetByIdAsync(int id)
-        {
-            try
-            {
-                return await _context.Produtos
-                    .AsNoTracking()
-                    .FirstOrDefaultAsync(pf => pf.Id == id);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Erro ao obter produto financeiro por ID: {Id}", id);
-                throw new InvalidOperationException("Erro ao obter produto financeiro por ID.", ex);
-            }
-        }
-
-        public async Task<IEnumerable<Produto>> GetAllAsync()
-        {
-            try
-            {
-                return await _context.Produtos.AsNoTracking().ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Erro ao obter todos os produtos financeiros.");
-                throw new InvalidOperationException("Erro ao obter todos os produtos financeiros.", ex);
-            }
-        }
-
         public async Task<IEnumerable<Produto>> GetAvailableAsync()
         {
             try
@@ -105,34 +58,6 @@ namespace FinServ.Infra.Repositories
             {
                 _logger.LogError(ex, "Erro ao obter produtos financeiros disponíveis.");
                 throw new InvalidOperationException("Erro ao obter produtos financeiros disponíveis.", ex);
-            }
-        }
-
-        public async Task DeleteAsync(Produto produto)
-        {
-            try
-            {
-                _context.Produtos.Remove(produto);
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Erro ao remover produto financeiro: {Produto}", produto);
-                throw new InvalidOperationException("Erro ao remover produto financeiro.", ex);
-            }
-        }
-
-        public void Update(Produto entity)
-        {
-            try
-            {
-                _context.Produtos.Update(entity);
-                _context.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Erro ao atualizar produto financeiro: {Produto}", entity);
-                throw new InvalidOperationException("Erro ao atualizar produto financeiro.", e);
             }
         }
     }

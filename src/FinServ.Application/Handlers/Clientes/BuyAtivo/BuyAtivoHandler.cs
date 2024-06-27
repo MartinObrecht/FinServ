@@ -17,7 +17,7 @@ namespace FinServ.Application.Handlers.Clientes.BuyAtivo
 
         public async Task<BuyAtivoResponse> Handle(BuyAtivoRequest request, CancellationToken cancellationToken)
         {
-            var resultService = await _clienteService.ComprarAtivoAsync(request.IdCliente, request.CodigoProduto, request.Quantidade);
+            var resultService = await _clienteService.ComprarAtivoAsync(request.Cpf, request.IdProduto, request.Quantidade);
 
             return new BuyAtivoResponse
             {

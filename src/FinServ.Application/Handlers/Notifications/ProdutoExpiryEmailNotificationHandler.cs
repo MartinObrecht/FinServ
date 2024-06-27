@@ -5,18 +5,18 @@ namespace FinServ.Application.Handlers.Notifications
 {
     public class ProdutoExpiryEmailNotificationHandler : IRequestHandler<ProdutoExpiryEmailNotificationRequest, ProdutoExpiryEmailNotificationResponse>
     {
-        private IMediator _mediator;
-        private IAtivoRepository _ativoRepository;
+        private readonly IMediator _mediator;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ProdutoExpiryEmailNotificationHandler(IMediator mediator, IAtivoRepository ativoRepository)
+        public ProdutoExpiryEmailNotificationHandler(IMediator mediator, IUnitOfWork unitOfWork)
         {
             _mediator = mediator;
-            _ativoRepository = ativoRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<ProdutoExpiryEmailNotificationResponse> Handle(ProdutoExpiryEmailNotificationRequest request, CancellationToken cancellationToken)
         {
-            var produtosComVencimentoHoje = await _ativoRepository.GetProdutosExpiry(request.DataVencimentoProduto);
+            var produtosComVencimentoHoje = await _unitOfWork.Ativos.GetProdutosExpiry(request.DataVencimentoProduto);
 
             if (produtosComVencimentoHoje == null)
             {

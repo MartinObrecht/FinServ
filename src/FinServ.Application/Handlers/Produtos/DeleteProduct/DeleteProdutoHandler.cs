@@ -8,19 +8,19 @@ namespace FinServ.Application.Handlers.Produtos.DeleteProduct
     public class DeleteProdutoHandler : IRequestHandler<DeleteProdutoRequest, DeleteProdutoResponse>
     {
         private readonly IMediator _mediator;
-        private readonly IProdutoRepository _produtoRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<DeleteProdutoHandler> _logger;
 
-        public DeleteProdutoHandler(IMediator mediator, IProdutoRepository produtoRepository, ILogger<DeleteProdutoHandler> logger)
+        public DeleteProdutoHandler(IMediator mediator, IUnitOfWork unitOfWork, ILogger<DeleteProdutoHandler> logger)
         {
             _mediator = mediator;
-            _produtoRepository = produtoRepository;
+            _unitOfWork = unitOfWork;
             _logger = logger;
         }
 
         public async Task<DeleteProdutoResponse> Handle(DeleteProdutoRequest request, CancellationToken cancellationToken)
         {
-            var produto = await _produtoRepository.GetByIdAsync(request.IdProduto);
+            var produto = await _unitOfWork.Produtos.GetByIdAsync(request.IdProduto);
 
             if (produto is null)
             {
@@ -32,7 +32,8 @@ namespace FinServ.Application.Handlers.Produtos.DeleteProduct
                 };
             }
 
-            await _produtoRepository.DeleteAsync(produto);
+            _unitOfWork.Produtos.Delete(produto);
+            _unitOfWork.Commit();
 
             return new DeleteProdutoResponse
             {
