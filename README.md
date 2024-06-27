@@ -5,19 +5,19 @@ Desenvolvimento backend para um sistema de gestão de portfólio de investimento
 ## 🔌 Tomada de Decisão
 
 - **Padrão CQRS (Command Query Responsibility Segregation):**
-    - Optei pelo padrão CQRS porque acredito que a separação de responsabilidades entre operações de leitura e escrita facilita a manutenção e evolução do sistema. Além disso, permite escalabilidade.
+    - Optei pelo padrão CQRS para a arquitetura porque acredito que a separação de responsabilidades entre operações de leitura e escrita facilita a manutenção e evolução do sistema. Além disso, permite escalabilidade.
     - Para a implementação do CQRS, estou utilizando a biblioteca MediatR, que simplifica o gerenciamento de comandos e queries. Ela também oferece suporte a injeção de dependências nos handlers e notificações de eventos.
 
 - **Abordagem Code First para o Banco de Dados:**
-    - Escolhi a abordagem Code First para a criação do banco de dados. Ela facilita a evolução do modelo de dados e permite a criação de scripts de migração para versionamento.
-    - Utilizo o Entity Framework Core para migrações de banco de dados e mapeamento de entidades.
+    - Escolhi a abordagem Code First para a criação do banco de dados, visando facilitar a evolução do modelo de dados e a criação de scripts de migração para versionamento.
+    - Escolhi o Entity Framework Core como ORM, por ser uma ferramenta robusta e ateder as necessidades do projeto.
 
 - **Deploy no Azure:**
-    - Realizei o deploy da aplicação no Azure usando os serviços Web App Services via Docker e Azure SQL.
-    - Minha próxima etapa é criar uma Azure Function para processar notificações de eventos e utilizar o Azure Service Bus para comunicação entre os microserviços.
+    - Escolhi realizar o deploy da aplicação no Azure para facilitar a escalabilidade e gerenciamento da infraestrutura, além disso visei faciltar o acesso a documentação da API.
+    - Optei por utilizar o serviço de Web App Services, que oferece suporte a contêineres Docker e integração com pipelines de CI/CD, e banco de dados Azure SQL.
 
 - **Pipeline de CI/CD no GitHub Actions:**
-    - Configurei um pipeline de CI/CD no GitHub Actions para realizar o build, atualizar a imagem no Docker Hub e fazer o deploy do projeto a cada push na branch master.
+    - Configurei um pipeline de CI/CD no GitHub Actions para realizar o build, atualizar a imagem no Docker Hub e fazer o deploy do projeto a cada push na branch master, facilitando a integração/entrega contínua e garantindo entrega de novas funcionalidades e correções de bugs de maneira rápida e segura.
 
 ## 🚀 Começando
 
