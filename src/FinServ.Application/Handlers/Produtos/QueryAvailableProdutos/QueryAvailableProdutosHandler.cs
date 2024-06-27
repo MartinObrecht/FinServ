@@ -6,18 +6,18 @@ namespace FinServ.Application.Handlers.Produtos.QueryAvailableProdutos
 {
     public class QueryAvailableProdutosHandler : IRequestHandler<QueryAvailableProdutosRequest, IList<QueryAvailableProdutosResponse>>
     {
-        private readonly IProdutoRepository _produtoRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<QueryAvailableProdutosHandler> _logger;
 
-        public QueryAvailableProdutosHandler(IProdutoRepository produtoRepository, ILogger<QueryAvailableProdutosHandler> logger)
+        public QueryAvailableProdutosHandler(IUnitOfWork unitOfWork, ILogger<QueryAvailableProdutosHandler> logger)
         {
-            _produtoRepository = produtoRepository;
+            _unitOfWork = unitOfWork;
             _logger = logger;
         }
 
         public async Task<IList<QueryAvailableProdutosResponse>> Handle(QueryAvailableProdutosRequest request, CancellationToken cancellationToken)
         {
-            var Produtos = await _produtoRepository.GetAvailableAsync();
+            var Produtos = await _unitOfWork.Produtos.GetAvailableAsync();
 
             var response = new List<QueryAvailableProdutosResponse>();
 
@@ -27,6 +27,7 @@ namespace FinServ.Application.Handlers.Produtos.QueryAvailableProdutos
                 {
                     IdProduto = produto.Id,
                     Nome = produto.Nome,
+                    Valor = produto.Valor,
                     TaxaJurosMensal = produto.TaxaJurosMensal,
                     DataVencimento = produto.DataVencimento.ToShortDateString(),
                     Quantidade = produto.Quantidade,

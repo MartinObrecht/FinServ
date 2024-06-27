@@ -8,19 +8,19 @@ namespace FinServ.Application.Handlers.Produtos.QueryProdutoByCodigo
     public class QueryProdutoByCodigoHandler : IRequestHandler<QueryProdutoByCodigoRequest, QueryProdutoByCodigoResponse>
     {
         private readonly IMediator _mediator;
-        private readonly IProdutoRepository _produtoRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<QueryProdutoByCodigoHandler> _logger;
 
-        public QueryProdutoByCodigoHandler(IMediator mediator, IProdutoRepository produtoRepository, ILogger<QueryProdutoByCodigoHandler> logger)
+        public QueryProdutoByCodigoHandler(IMediator mediator, IUnitOfWork unitOfWork, ILogger<QueryProdutoByCodigoHandler> logger)
         {
             _mediator = mediator;
-            _produtoRepository = produtoRepository;
+            _unitOfWork = unitOfWork;
             _logger = logger;
         }
 
         public async Task<QueryProdutoByCodigoResponse> Handle(QueryProdutoByCodigoRequest request, CancellationToken cancellationToken)
         {
-            var produto = await _produtoRepository.GetByCodigoAsync(request.CodigoProduto);
+            var produto = await _unitOfWork.Produtos.GetByCodigoAsync(request.CodigoProduto);
 
             if (produto == null) {
                 return new QueryProdutoByCodigoResponse

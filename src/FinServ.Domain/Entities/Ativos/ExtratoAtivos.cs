@@ -7,6 +7,8 @@ namespace FinServ.Domain.Entities.Ativos
     {
         public int IdCliente { get; set; }
         public string NomeCliente { get; set; }
+        public decimal SaldoCliente { get; set; }
+        public int IdAtivo { get; set; }
         public string NomeProduto { get; set; }
         public string DescricaoProduto { get; set; }
         public DateTime DataVencimentoProduto { get; set; }

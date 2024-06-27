@@ -18,7 +18,7 @@ namespace FinServ.Api.Controllers
             _logger = logger;
         }
 
-        [HttpPost("ProdutosExpiracaoHoje")]
+        [HttpPost("ProdutosAVencer")]
         public async Task<IActionResult> ProdutoExpiryEmailNotification([FromBody] ProdutoExpiryEmailNotificationRequest request)
         {
             var response = await _mediator.Send(request);

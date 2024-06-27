@@ -17,7 +17,7 @@ namespace FinServ.Application.Handlers.Clientes.SellAtivo
 
         public async Task<SellAtivoResponse> Handle(SellAtivoRequest request, CancellationToken cancellationToken)
         {
-            var resultService = await _clienteService.VenderAtivoAsync(request.AtivoId);
+            var resultService = await _clienteService.VenderAtivoAsync(request.AtivoId, request.Cpf);
 
             return new SellAtivoResponse
             {

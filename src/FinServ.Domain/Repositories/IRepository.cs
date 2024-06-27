@@ -10,6 +10,6 @@
 
         void Update(T entity);
 
-        Task DeleteAsync(T entity);
+        void Delete(T entity);
     }
 }

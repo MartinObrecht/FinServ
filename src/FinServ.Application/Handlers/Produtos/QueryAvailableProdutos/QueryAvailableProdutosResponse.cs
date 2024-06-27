@@ -4,6 +4,7 @@
     {
         public int IdProduto { get; set; }
         public string Nome { get; set; }
+        public decimal Valor { get; set; }
         public decimal TaxaJurosMensal { get; set; }
         public string DataVencimento { get; set; }
         public int Quantidade { get; set; }

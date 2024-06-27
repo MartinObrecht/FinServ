@@ -2,8 +2,8 @@
 
 namespace FinServ.Application.Handlers.Clientes.GetAtivos
 {
-    public class GetAtivosRequest : IRequest<IList<GetAtivosResponse>>
+    public class GetAtivosRequest : IRequest<GetAtivosResponse>
     {
-        public int ClienteId { get; set; }
+        public string Cpf { get; set; }
     }
 }
