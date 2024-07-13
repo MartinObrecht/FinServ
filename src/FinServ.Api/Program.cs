@@ -1,3 +1,5 @@
+using System.Reflection;
+using FinServ.Api.Extensions;
 using FinServ.Application;
 using FinServ.Infrastructure;
 using Serilog;
@@ -11,6 +13,8 @@ builder.Services
     .AddApplication()
     .AddInfrastructure();
 
+builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
+
 builder.Host.UseSerilog((context, configuration) =>
 {
     configuration
@@ -18,6 +22,8 @@ builder.Host.UseSerilog((context, configuration) =>
 });
 
 var app = builder.Build();
+
+app.MapEndpoints();
 
 if (app.Environment.IsDevelopment())
 {
