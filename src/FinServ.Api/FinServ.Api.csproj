@@ -18,8 +18,4 @@
     <ProjectReference Include="../FinServ.Infrastructure/FinServ.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Endpoints/Costumers/" />
-  </ItemGroup>
-
 </Project>

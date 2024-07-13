@@ -1,8 +1,6 @@
-using System.Reflection;
-using FinServ.Api.Extensions;
+using FinServ.Api.Endpoints;
 using FinServ.Application;
 using FinServ.Infrastructure;
-using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,17 +11,13 @@ builder.Services
     .AddApplication()
     .AddInfrastructure();
 
-builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
-
-builder.Host.UseSerilog((context, configuration) =>
-{
-    configuration
-        .ReadFrom.Configuration(context.Configuration);
-});
+// builder.Host.UseSerilog((context, configuration) =>
+// {
+//     configuration
+//         .ReadFrom.Configuration(context.Configuration);
+// });
 
 var app = builder.Build();
-
-app.MapEndpoints();
 
 if (app.Environment.IsDevelopment())
 {
@@ -31,7 +25,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseSerilogRequestLogging();
+app.AddCostumersEndpoints();
+// app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
